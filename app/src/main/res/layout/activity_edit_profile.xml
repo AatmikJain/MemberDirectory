@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        tools:context=".RegisterActivity">
+
+
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/edit_profile"-->
+            <!--android:textSize="@dimen/text_size_xxlarge"-->
+            <!--android:gravity="center" />-->
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:padding="@dimen/padding"
+            app:srcCompat="@drawable/sgsits_logo"
+            android:contentDescription="@string/sgsits_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_large"
+            android:layout_marginBottom="@dimen/text_size_large"/>
+
+
+        <EditText
+            android:id="@+id/nameEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:autoText="true"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:layout_marginEnd="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin"
+            android:gravity="left"
+            android:hint="@string/name"
+            android:inputType="textPersonName"
+            android:padding="@dimen/padding"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_large" />
+
+        <EditText
+            android:id="@+id/mobileNumberEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:layout_marginEnd="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin"
+            android:gravity="left"
+            android:hint="@string/mob_num"
+            android:inputType="phone"
+            android:padding="@dimen/padding"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_large" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/cityEt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_marginEnd="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:hint="@string/city"
+                android:inputType="text"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_large" />
+
+            <EditText
+                android:id="@+id/pincodeEt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_marginEnd="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:hint="@string/pincode"
+                android:inputType="number"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_large" />
+        </LinearLayout>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:soundEffectsEnabled="true">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="@dimen/padding_xlarge"
+                android:layout_marginRight="@dimen/margin_xxlarge"
+                android:textSize="@dimen/text_size_large"
+                android:text="@string/male"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="@dimen/padding_xlarge"
+                android:textSize="@dimen/text_size_large"
+                android:text="@string/female"/>
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/registerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:layout_marginEnd="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin"
+            android:background="@drawable/round_button"
+            android:padding="@dimen/padding_xlarge"
+            android:text="@string/save_changes"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_xlarge" />
+
+    </LinearLayout>
+</ScrollView>

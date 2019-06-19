@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:context=".RegisterActivity">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xlarge"
+            android:layout_marginBottom="@dimen/padding_large"
+            android:gravity="center"
+            android:text="@string/register_mem"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_xxlarge"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_large"
+            android:layout_marginBottom="@dimen/text_size_large"
+            android:contentDescription="@string/sgsits_logo"
+            android:padding="@dimen/padding"
+            app:srcCompat="@drawable/sgsits_logo" />
+
+        <EditText
+            android:id="@+id/emailEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:layout_marginEnd="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin"
+            android:autoText="true"
+            android:gravity="left"
+            android:hint="@string/email_id"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/padding"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_large" />
+
+        <EditText
+            android:id="@+id/passwordEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:layout_marginEnd="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin"
+            android:gravity="left"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:padding="@dimen/padding"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_large" />
+
+        <EditText
+            android:id="@+id/nameEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:layout_marginEnd="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin"
+            android:autoText="true"
+            android:gravity="left"
+            android:hint="@string/name"
+            android:inputType="textPersonName"
+            android:padding="@dimen/padding"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_large" />
+
+        <EditText
+            android:id="@+id/mobileNumberEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:layout_marginEnd="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin"
+            android:gravity="left"
+            android:hint="@string/mob_num"
+            android:inputType="phone"
+            android:padding="@dimen/padding"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_large" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/dob"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:hint="@string/date_of_birth"
+                android:inputType="date" />
+
+            <ImageView
+                android:id="@+id/calendar_icon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="setDate"
+                android:src="@drawable/ic_date_range_black_24dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/cityEt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_marginEnd="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:hint="@string/city"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_large" />
+
+            <EditText
+                android:id="@+id/pincodeEt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_marginEnd="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:hint="@string/pincode"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_large" />
+        </LinearLayout>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:soundEffectsEnabled="true">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/margin_xxlarge"
+                android:padding="@dimen/padding_xlarge"
+                android:text="@string/male"
+                android:textSize="@dimen/text_size_large" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="@dimen/padding_xlarge"
+                android:text="@string/female"
+                android:textSize="@dimen/text_size_large" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/registerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:layout_marginEnd="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginBottom="@dimen/margin"
+            android:background="@drawable/round_button"
+            android:padding="@dimen/padding_xlarge"
+            android:text="@string/register"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_xlarge" />
+
+        <TextView
+            android:id="@+id/alreadyAMember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="login"
+            android:text="@string/already_a_member" />
+
+    </LinearLayout>
+</ScrollView>

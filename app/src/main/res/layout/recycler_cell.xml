@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".RegisterActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="91dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_person_black_24dp" />
+        <TableRow
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#444">
+
+        </TableRow>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Student 1"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_xlarge" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#444">
+
+            </TableRow>
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Student"
+                android:textSize="@dimen/text_size_xlarge"
+                android:textColor="@android:color/black"  />
+        </LinearLayout>
+
+        <TableRow
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#444">
+        </TableRow>
+        <Button
+            android:layout_width="147dp"
+            android:layout_height="match_parent"
+            android:text="OK"
+            android:textSize="@dimen/text_size_xlarge"
+            android:textColor="@android:color/white"
+            android:background="@color/button" />
+    </LinearLayout>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444">
+
+    </TableRow>
+</LinearLayout>

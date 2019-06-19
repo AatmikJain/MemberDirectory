@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name = "padding">4sp</dimen>
+    <dimen name = "padding_large">8sp</dimen>
+    <dimen name = "padding_xlarge">13sp</dimen>
+    <dimen name = "padding_xxlarge">19sp</dimen>
+    <dimen name = "padding_xxxlarge">26sp</dimen>
+
+    <dimen name = "margin">5sp</dimen>
+    <dimen name = "margin_large">10sp</dimen>
+    <dimen name = "margin_xlarge">15sp</dimen>
+    <dimen name = "margin_xxlarge">20sp</dimen>
+
+    <dimen name = "text_size">12sp</dimen>
+    <dimen name = "text_size_large">18sp</dimen>
+    <dimen name = "text_size_xlarge">24sp</dimen>
+    <dimen name = "text_size_xxlarge">30sp</dimen>
+
+
+</resources>
