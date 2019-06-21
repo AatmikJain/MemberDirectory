@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -18,7 +17,7 @@ import java.util.Calendar;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
     private final String TAG = "Register";
-    private Button register;
+    private Button registerBtn;
     private EditText emailEt, passwordEt, nameEt, mobileNumberEt, cityEt, pincodeEt, dobEt;
     private ImageView calendarIcon;
     private DatePicker datePicker;
@@ -36,18 +35,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 //        }catch(Exception e){ e.printStackTrace();}
 
 
-        register = findViewById(R.id.registerBtn);
-        register.setOnClickListener(this);
+        registerBtn = findViewById(R.id.register);
+        registerBtn.setOnClickListener(this);
 
         calendarIcon = findViewById(R.id.calendar_icon);
 //        calendarIcon.setOnClickListener(this);
 
-        emailEt = findViewById(R.id.emailEt);
-        passwordEt = findViewById(R.id.passwordEt);
-        nameEt = findViewById(R.id.nameEt);
-        mobileNumberEt = findViewById(R.id.mobileNumberEt);
-        cityEt = findViewById(R.id.cityEt);
-        pincodeEt = findViewById(R.id.pincodeEt);
+        emailEt = findViewById(R.id.emailAddress);
+        passwordEt = findViewById(R.id.password);
+        nameEt = findViewById(R.id.name);
+        mobileNumberEt = findViewById(R.id.mobileNumber);
+        cityEt = findViewById(R.id.city);
+        pincodeEt = findViewById(R.id.pincode);
         dobEt = findViewById(R.id.dob);
         dobEt.setEnabled(false);
 
@@ -59,13 +58,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
     public void login(View v)
     {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
     @Override
     public void onClick(View v)
     {
-        if(v.getId()==R.id.registerBtn)
+        if(v.getId()==R.id.register)
         {
             String email = emailEt.getText().toString(), password = passwordEt.getText().toString(), name = nameEt.getText().toString();
             String mobileNumber = mobileNumberEt.getText().toString(), city = cityEt.getText().toString(), pincode = pincodeEt.getText().toString();

@@ -32,26 +32,35 @@
             android:layout_marginTop="@dimen/padding_large"
             android:layout_marginBottom="@dimen/text_size_large"/>
 
-
-        <EditText
-            android:id="@+id/nameEt"
-            android:layout_width="match_parent"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/nameTIL"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:autoText="true"
-            android:layout_marginStart="@dimen/margin"
-            android:layout_marginLeft="@dimen/margin"
-            android:layout_marginTop="@dimen/margin"
-            android:layout_marginEnd="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
-            android:layout_marginBottom="@dimen/margin"
-            android:gravity="left"
-            android:hint="@string/name"
-            android:inputType="textPersonName"
-            android:padding="@dimen/padding"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_large" />
-
+            android:layout_marginTop="10dp">
+            <EditText
+                android:id="@+id/nameEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:autoText="true"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_marginEnd="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                android:gravity="left"
+                android:hint="@string/name"
+                android:inputType="textPersonName"
+                android:padding="@dimen/padding"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_large" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/mobileNumberTIL"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
         <EditText
             android:id="@+id/mobileNumberEt"
             android:layout_width="match_parent"
@@ -69,47 +78,83 @@
             android:padding="@dimen/padding"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_large" />
+        </android.support.design.widget.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/dobTIL"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:layout_marginTop="10dp">
+            <EditText
+                android:id="@+id/dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/date_of_birth"
+                android:inputType="date" />
+            </android.support.design.widget.TextInputLayout>
+            <ImageView
+                android:id="@+id/calendar_icon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/ic_date_range_black_24dp" />
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/cityEt"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/cityTIL"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:layout_marginStart="@dimen/margin"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginTop="@dimen/margin"
-                android:layout_marginEnd="@dimen/margin"
-                android:layout_marginRight="@dimen/margin"
-                android:layout_marginBottom="@dimen/margin"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:hint="@string/city"
-                android:inputType="text"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/text_size_large" />
-
-            <EditText
-                android:id="@+id/pincodeEt"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1">
+                <EditText
+                    android:id="@+id/cityEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:layout_marginStart="@dimen/margin"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_marginTop="@dimen/margin"
+                    android:layout_marginEnd="@dimen/margin"
+                    android:layout_marginRight="@dimen/margin"
+                    android:layout_marginBottom="@dimen/margin"
+                    android:gravity="left"
+                    android:hint="@string/city"
+                    android:inputType="text"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_large" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/pincodeTIL"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:layout_marginStart="@dimen/margin"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginTop="@dimen/margin"
-                android:layout_marginEnd="@dimen/margin"
-                android:layout_marginRight="@dimen/margin"
-                android:layout_marginBottom="@dimen/margin"
                 android:layout_weight="1"
-                android:gravity="left"
-                android:hint="@string/pincode"
-                android:inputType="number"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/text_size_large" />
+                android:layout_marginTop="10dp">
+                <EditText
+                    android:id="@+id/pincodeEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:layout_marginStart="@dimen/margin"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_marginTop="@dimen/margin"
+                    android:layout_marginEnd="@dimen/margin"
+                    android:layout_marginRight="@dimen/margin"
+                    android:layout_marginBottom="@dimen/margin"
+                    android:gravity="left"
+                    android:hint="@string/pincode"
+                    android:inputType="number"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_large" />
+            </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <RadioGroup
@@ -119,6 +164,7 @@
             android:soundEffectsEnabled="true">
 
             <RadioButton
+                android:id="@+id/male"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:padding="@dimen/padding_xlarge"
@@ -127,15 +173,24 @@
                 android:text="@string/male"/>
 
             <RadioButton
+                android:id="@+id/female"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:padding="@dimen/padding_xlarge"
                 android:textSize="@dimen/text_size_large"
                 android:text="@string/female"/>
+
+            <RadioButton
+                android:id="@+id/other"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="@dimen/padding_xlarge"
+                android:text="@string/other"
+                android:textSize="@dimen/text_size_large"/>
         </RadioGroup>
 
         <Button
-            android:id="@+id/registerBtn"
+            android:id="@+id/saveChanges"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin"

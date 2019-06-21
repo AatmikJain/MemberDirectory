@@ -5,36 +5,59 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_cur_activity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:icon="@drawable/ic_stay_current_portrait_black_24dp"
+            android:title="@string/current_activity" />
+        <item
             android:id="@+id/nav_editProfile"
             android:icon="@drawable/ic_edit_black_24dp"
             android:title="@string/edit_profile" />
         <item
-            android:id="@+id/nav_change_password"
-            android:icon="@drawable/ic_settings_black_24dp"
-            android:title="@string/change_pass"/>
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_search_black_24dp"
+            android:title="@string/search" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow"
-            />
+            android:id="@+id/nav_notifications"
+            android:icon="@drawable/ic_notifications_black_24dp"
+            android:title="@string/notifications"/>
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_generate_pdf"
+            android:icon="@drawable/ic_picture_as_pdf_black_24dp"
+            android:title="@string/generate_pdf"/>
+
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_share_black_24dp"
+                android:title="@string/share_app"/>
+            <item
                 android:id="@+id/nav_settings"
                 android:icon="@drawable/ic_settings_black_24dp"
-                android:title="Settings" />
+                android:title="@string/settings">
+                <!--<menu>-->
+                    <!--<item-->
+                        <!--android:id="@+id/nav_change_password"-->
+                        <!--android:icon="@drawable/ic_settings_black_24dp"-->
+                        <!--android:title="@string/change_pass"/>-->
+                    <!--<item-->
+                        <!--android:id="@+id/nav_theme"-->
+                        <!--android:title="Theme"/>-->
+                <!--</menu>-->
+            </item>
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_home_black_24dp"
                 android:title="@string/logout" />
+            <item
+                android:id="@+id/nav-about"
+                android:icon="@drawable/ic_info_black_24dp"
+                android:title="@string/about"/>
+
         </menu>
     </item>
 

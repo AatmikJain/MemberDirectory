@@ -9,28 +9,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".RegisterActivity" />
+        <activity
+            android:name=".RegisterActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".EditProfileActivity" />
-        <activity android:name=".ChangePasswordActivity" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".EditProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ChangePasswordActivity"
+            android:screenOrientation="portrait"/>
 
         <service
             android:name=".MyService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".ExampleActivity" />
-        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".ExampleActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ForgotPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

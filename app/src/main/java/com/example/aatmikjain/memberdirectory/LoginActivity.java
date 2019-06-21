@@ -9,12 +9,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button mLoginBtn;
     private EditText usernameEt;
     private EditText passwordEt;
-    private TextView noAccYetTv;
+    private TextView noAccYetTv, forgotPasswordTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         noAccYetTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -35,10 +35,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         usernameEt = findViewById(R.id.usernameEt);
         passwordEt = findViewById(R.id.passwordEt);
 
+        forgotPasswordTv = findViewById(R.id.forgotPassword);
+        forgotPasswordTv.setOnClickListener(this);
+
 //        mLoginBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Toast.makeText(MainActivity.this,"Hello World", Toast.LENGTH_LONG).show();
+//                Toast.makeText(LoginActivity.this,"Hello World", Toast.LENGTH_LONG).show();
 //            }
 //        });
     }
@@ -55,9 +58,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        startActivity(intent);
 //    }
 
+
+    @Override
+    public void onBackPressed() {
+        //disabling back button
+    }
+
     @Override
     public void onClick(View v)
     {
+        if(v.getId()==R.id.forgotPassword)
+        {
+            Intent intent = new Intent(this, ForgotPasswordActivity.class);
+            startActivity(intent);
+        }
         if(v.getId()==R.id.loginBtn)
         {
             String username = usernameEt.getText().toString();

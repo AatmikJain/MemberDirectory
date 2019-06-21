@@ -27,7 +27,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_large"
@@ -36,54 +36,56 @@
             android:padding="@dimen/padding"
             app:srcCompat="@drawable/sgsits_logo" />
 
-        <EditText
-            android:id="@+id/emailEt"
-            android:layout_width="match_parent"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/emailAddressTIL"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin"
-            android:layout_marginLeft="@dimen/margin"
-            android:layout_marginTop="@dimen/margin"
-            android:layout_marginEnd="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
-            android:layout_marginBottom="@dimen/margin"
-            android:autoText="true"
-            android:gravity="left"
-            android:hint="@string/email_id"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/padding"
-            android:singleLine="true"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_large" />
+            android:layout_marginTop="10dp">
 
-        <EditText
-            android:id="@+id/passwordEt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin"
-            android:layout_marginLeft="@dimen/margin"
-            android:layout_marginTop="@dimen/margin"
-            android:layout_marginEnd="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
-            android:layout_marginBottom="@dimen/margin"
-            android:gravity="left"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:padding="@dimen/padding"
-            android:singleLine="true"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_large" />
+            <EditText
+                android:id="@+id/emailAddress"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/email_address"
+                android:inputType="textEmailAddress"
+                android:layout_margin = "@dimen/margin"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@android:color/black"
+                android:padding="@dimen/padding_large"
+                android:singleLine="true"/>
+                <!--android:drawableRight="@drawable/ic_email_black_24dp"/>-->
+        </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/passwordTIL"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:gravity="left"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:padding="@dimen/padding"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_large" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/nameTIL"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
         <EditText
-            android:id="@+id/nameEt"
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin"
-            android:layout_marginLeft="@dimen/margin"
-            android:layout_marginTop="@dimen/margin"
-            android:layout_marginEnd="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
-            android:layout_marginBottom="@dimen/margin"
-            android:autoText="true"
+            android:layout_margin="@dimen/margin"
             android:gravity="left"
             android:hint="@string/name"
             android:inputType="textPersonName"
@@ -91,17 +93,17 @@
             android:singleLine="true"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_large" />
-
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/mobileNumberTIL"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
         <EditText
-            android:id="@+id/mobileNumberEt"
+            android:id="@+id/mobileNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin"
-            android:layout_marginLeft="@dimen/margin"
-            android:layout_marginTop="@dimen/margin"
-            android:layout_marginEnd="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
-            android:layout_marginBottom="@dimen/margin"
+            android:layout_margin="@dimen/margin"
             android:gravity="left"
             android:hint="@string/mob_num"
             android:inputType="phone"
@@ -109,26 +111,34 @@
             android:singleLine="true"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_large" />
-
+        </android.support.design.widget.TextInputLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/dob"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/dobTIL"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:hint="@string/date_of_birth"
-                android:inputType="date" />
-
+                android:layout_marginTop="10dp"
+                android:layout_weight="5">
+                <EditText
+                    android:id="@+id/dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/date_of_birth"
+                    android:inputType="date"
+                    android:enabled="false"
+                    android:layout_margin="@dimen/margin_large"
+                    android:textColor="@android:color/black"/>
+            </android.support.design.widget.TextInputLayout>
             <ImageView
                 android:id="@+id/calendar_icon"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="setDate"
+                android:layout_margin="@dimen/margin_large"
                 android:src="@drawable/ic_date_range_black_24dp" />
         </LinearLayout>
 
@@ -136,10 +146,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/cityEt"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/cityTIL"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp">
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin"
                 android:layout_marginLeft="@dimen/margin"
@@ -147,17 +162,22 @@
                 android:layout_marginEnd="@dimen/margin"
                 android:layout_marginRight="@dimen/margin"
                 android:layout_marginBottom="@dimen/margin"
-                android:layout_weight="1"
                 android:gravity="left"
                 android:hint="@string/city"
                 android:inputType="text"
                 android:singleLine="true"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_size_large" />
-
-            <EditText
-                android:id="@+id/pincodeEt"
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/pincodeTIL"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp">
+            <EditText
+                android:id="@+id/pincode"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin"
                 android:layout_marginLeft="@dimen/margin"
@@ -165,22 +185,24 @@
                 android:layout_marginEnd="@dimen/margin"
                 android:layout_marginRight="@dimen/margin"
                 android:layout_marginBottom="@dimen/margin"
-                android:layout_weight="1"
                 android:gravity="left"
                 android:hint="@string/pincode"
                 android:inputType="number"
                 android:singleLine="true"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_size_large" />
+            </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:soundEffectsEnabled="true">
+            android:soundEffectsEnabled="true"
+            android:layout_marginLeft="@dimen/margin_large">
 
             <RadioButton
+                android:id="@+id/male"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/margin_xxlarge"
@@ -189,15 +211,24 @@
                 android:textSize="@dimen/text_size_large" />
 
             <RadioButton
+                android:id="@+id/female"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:padding="@dimen/padding_xlarge"
                 android:text="@string/female"
                 android:textSize="@dimen/text_size_large" />
+
+            <RadioButton
+                android:id="@+id/other"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="@dimen/padding_xlarge"
+                android:text="@string/other"
+                android:textSize="@dimen/text_size_large"/>
         </RadioGroup>
 
         <Button
-            android:id="@+id/registerBtn"
+            android:id="@+id/register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin"
