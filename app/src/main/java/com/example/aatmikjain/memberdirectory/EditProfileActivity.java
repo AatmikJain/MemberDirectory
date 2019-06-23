@@ -16,7 +16,7 @@ import java.util.Calendar;
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button saveChangesBtn;
-    private EditText nameEt, mobileNumberEt, dobEt, cityEt, pincodeEt;
+    private EditText firstNameEt, lastNameEt, mobileNumberEt, dobEt, cityEt, pincodeEt;
     private RadioButton maleRb, femaleRb;
     private ImageView cal_icon;
     private Calendar calendar;
@@ -33,7 +33,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
         saveChangesBtn = findViewById(R.id.saveChanges);
-        nameEt = findViewById(R.id.name);
+        firstNameEt = findViewById(R.id.firstName);
+        lastNameEt = findViewById(R.id.lastName);
         mobileNumberEt = findViewById(R.id.mobileNumber);
         dobEt = findViewById(R.id.dob);
         cityEt = findViewById(R.id.city);

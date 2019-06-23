@@ -18,7 +18,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private final String TAG = "Register";
     private Button registerBtn;
-    private EditText emailEt, passwordEt, nameEt, mobileNumberEt, cityEt, pincodeEt, dobEt;
+    private EditText emailEt, passwordEt, firstNameEt, lastNameEt, mobileNumberEt, cityEt, pincodeEt, dobEt;
     private ImageView calendarIcon;
     private DatePicker datePicker;
     private Calendar calendar;
@@ -43,7 +43,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         emailEt = findViewById(R.id.emailAddress);
         passwordEt = findViewById(R.id.password);
-        nameEt = findViewById(R.id.name);
+        firstNameEt = findViewById(R.id.firstName);
+        lastNameEt = findViewById(R.id.lastName);
         mobileNumberEt = findViewById(R.id.mobileNumber);
         cityEt = findViewById(R.id.city);
         pincodeEt = findViewById(R.id.pincode);
@@ -66,14 +67,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     {
         if(v.getId()==R.id.register)
         {
-            String email = emailEt.getText().toString(), password = passwordEt.getText().toString(), name = nameEt.getText().toString();
-            String mobileNumber = mobileNumberEt.getText().toString(), city = cityEt.getText().toString(), pincode = pincodeEt.getText().toString();
+            String email = emailEt.getText().toString(), password = passwordEt.getText().toString(), firstName = firstNameEt.getText().toString(),
+                    lastName = lastNameEt.getText().toString(), mobileNumber = mobileNumberEt.getText().toString(), city = cityEt.getText().toString(), pincode = pincodeEt.getText().toString();
 
             if(email.isEmpty())
                 Toast.makeText(this,"Enter Email Address", Toast.LENGTH_LONG).show();
             else if(password.isEmpty())
                 Toast.makeText(this,"Enter Password", Toast.LENGTH_LONG).show();
-            else if(name.isEmpty())
+            else if(firstName.isEmpty())
                 Toast.makeText(this,"Enter Name", Toast.LENGTH_LONG).show();
             else if(mobileNumber.isEmpty())
                 Toast.makeText(this,"Enter Mobile Number", Toast.LENGTH_LONG).show();

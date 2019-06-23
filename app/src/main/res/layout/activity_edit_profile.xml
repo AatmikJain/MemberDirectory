@@ -32,30 +32,49 @@
             android:layout_marginTop="@dimen/padding_large"
             android:layout_marginBottom="@dimen/text_size_large"/>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/nameTIL"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-            <EditText
-                android:id="@+id/nameEt"
-                android:layout_width="match_parent"
+            android:orientation="horizontal">
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/firstNameTIL"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:autoText="true"
-                android:layout_marginStart="@dimen/margin"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginTop="@dimen/margin"
-                android:layout_marginEnd="@dimen/margin"
-                android:layout_marginRight="@dimen/margin"
-                android:layout_marginBottom="@dimen/margin"
-                android:gravity="left"
-                android:hint="@string/name"
-                android:inputType="textPersonName"
-                android:padding="@dimen/padding"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/text_size_large" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginTop="10dp">
+                <EditText
+                    android:id="@+id/firstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin"
+                    android:gravity="left"
+                    android:hint="@string/first_name"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/padding"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_large" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/lastNameTIL"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <EditText
+                    android:id="@+id/lastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin"
+                    android:gravity="left"
+                    android:hint="@string/last_name"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/padding"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_large" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
         <android.support.design.widget.TextInputLayout
             android:id="@+id/mobileNumberTIL"
             android:layout_width="fill_parent"
@@ -78,6 +97,24 @@
             android:padding="@dimen/padding"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_large" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/branchTIL"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <EditText
+                android:id="@+id/branch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:gravity="left"
+                android:hint="Branch"
+                android:inputType="phone"
+                android:padding="@dimen/padding"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_large" />
         </android.support.design.widget.TextInputLayout>
         <LinearLayout
             android:layout_width="match_parent"
