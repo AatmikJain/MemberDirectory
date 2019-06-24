@@ -47,6 +47,8 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="upload_photo">Upload Photo</string>
+    <string name="title">Title</string>
+    <string name="summary">Summary</string>
 
 
 </resources>

@@ -2,74 +2,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     tools:context=".RegisterActivity">
 
-
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="91dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_person_black_24dp" />
-        <TableRow
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#444">
-
-        </TableRow>
+        android:layout_height="wrap_content">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/text"
-                android:layout_width="145dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Student 1"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/text_size_xlarge" />
-            <TableRow
+                android:src="@drawable/sgsits_logo"
+                android:layout_margin="@dimen/margin"/>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#444">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title"
+                    android:textSize="@dimen/text_size_xxlarge"
+                    android:padding="@dimen/padding_large"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summary"
+                    android:textSize="@dimen/text_size_xlarge"
+                    android:padding="@dimen/padding_large"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-            </TableRow>
-            <TextView
-                android:id="@+id/text2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Student"
-                android:textSize="@dimen/text_size_xlarge"
-                android:textColor="@android:color/black"  />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:text="Start\nDate"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/text_size_large" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:text="End\nDate"
+                        android:textSize="@dimen/text_size_large"
+                        android:textColor="@android:color/black"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:text="Domain"
+                        android:textSize="@dimen/text_size_large"
+                        android:textColor="@android:color/black"/>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-
-        <TableRow
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#444">
-        </TableRow>
-        <Button
-            android:layout_width="147dp"
-            android:layout_height="match_parent"
-            android:text="OK"
-            android:textSize="@dimen/text_size_xlarge"
-            android:textColor="@android:color/white"
-            android:background="@color/button" />
-    </LinearLayout>
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#444">
-
-    </TableRow>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

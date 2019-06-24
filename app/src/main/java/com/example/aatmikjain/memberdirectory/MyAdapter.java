@@ -21,11 +21,11 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public static class ViewHolder extends RecyclerView.ViewHolder
     {
-        static TextView textView;
+        static TextView TitleTv;
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
-            textView = itemView.findViewById(R.id.text);
+            TitleTv = itemView.findViewById(R.id.Title);
         }
     }
 
@@ -39,7 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        ViewHolder.textView.setText(stringArrayList.get(i));
+        ViewHolder.TitleTv.setText(stringArrayList.get(i));
     }
 
     @Override
