@@ -134,6 +134,7 @@
             android:inputType="phone"
             android:padding="@dimen/padding"
             android:singleLine="true"
+            android:maxLength="10"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_large" />
         </android.support.design.widget.TextInputLayout>
@@ -230,6 +231,7 @@
                 android:layout_marginBottom="@dimen/margin"
                 android:gravity="left"
                 android:hint="@string/pincode"
+                android:maxLength="6"
                 android:inputType="number"
                 android:singleLine="true"
                 android:textColor="@android:color/black"

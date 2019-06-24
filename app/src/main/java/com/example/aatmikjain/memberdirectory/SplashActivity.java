@@ -17,7 +17,6 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         logo = findViewById(R.id.logo);
-        animator = findViewById(R.id.animator2);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

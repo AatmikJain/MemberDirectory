@@ -23,14 +23,31 @@
             <!--android:gravity="center" />-->
 
         <ImageView
-            android:id="@+id/imageView"
-            android:padding="@dimen/padding"
-            app:srcCompat="@drawable/sgsits_logo"
-            android:contentDescription="@string/sgsits_logo"
+            android:id="@+id/profilePhoto"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/sgsits_logo"
             android:layout_marginTop="@dimen/padding_large"
             android:layout_marginBottom="@dimen/text_size_large"/>
+        <!--android:padding="@dimen/padding"-->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="2"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".RegisterActivity">
+        <Button
+            android:id="@+id/uploadPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_button"
+            android:text="@string/upload_photo"
+            android:textSize="@dimen/text_size_large"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:padding="@dimen/padding_xlarge"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -241,6 +258,6 @@
             android:text="@string/save_changes"
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_size_xlarge" />
-
+</LinearLayout>
     </LinearLayout>
 </ScrollView>
