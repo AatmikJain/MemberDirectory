@@ -106,12 +106,14 @@ public class HomeActivity extends AppCompatActivity
         if (id == R.id.nav_editProfile) {
             Intent intent = new Intent(this, EditProfileActivity.class);
             startActivity(intent);
-//        } else if (id == R.id.nav_change_password) {
+        } else if (id == R.id.nav_search) {
 //            Intent intent = new Intent(this, ChangePasswordActivity.class);
 //            startActivity(intent);
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_notifications) {
+            Intent intent = new Intent(this, NotificationActivity.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_generate_pdf) {
 
         } else if (id == R.id.nav_settings) {
 

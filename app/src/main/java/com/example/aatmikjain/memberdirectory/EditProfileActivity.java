@@ -28,7 +28,7 @@ import android.widget.RadioButton;
 import java.io.File;
 import java.util.Calendar;
 
-public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener{
+public class EditProfileActivity extends AppCompatActivity{
 
     private Button saveChangesBtn, uploadPhotoBtn;
     private EditText firstNameEt, lastNameEt, mobileNumberEt, dobEt, cityEt, pincodeEt;
@@ -67,12 +67,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         cityEt = findViewById(R.id.city);
         pincodeEt = findViewById(R.id.pincode);
         cal_icon = findViewById(R.id.calendar_icon);
-        cal_icon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDate(year, month, day);
-            }
-        });
         uploadPhotoBtn = findViewById(R.id.uploadPhoto);
 
         uploadPhotoBtn.setOnClickListener(new View.OnClickListener() {
@@ -169,32 +163,33 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
 
 
-    public void setDate(View view)
-    {
-        showDialog(999);
-    }
-    private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int y, int m, int d) {
-            year = y;
-            month = m+1;
-            day = d;
-            showDate(year, month, day);
-        }
-    };
-    public Dialog onCreateDialog(int id)
-    {
-        if(id==999)
-            return new DatePickerDialog(this,myDateListener, year, month,day);
-        return null;
-    }
-    public void showDate(int year, int month, int dayOfMonth)
-    {
-        dobEt.setText(dayOfMonth+"/"+month+"/"+year);
+    public void setDate(View view) {
+        showDialog(view.getId());
+//        Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onClick(View v) {
+    protected Dialog onCreateDialog(int id) {
+        // TODO Auto-generated method stub
+        if (id == R.id.calendar_icon) {
+            return new DatePickerDialog(this, myDateListener, year, month, day);
+        }
+        return null;
+    }
 
+    private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker arg0,
+                              int arg1, int arg2, int arg3) {
+            // TODO Auto-generated method stub
+            year = arg1;
+            month = arg2+1;
+            day = arg3;
+            showDate(arg1, arg2+1, arg3);
+        }
+    };
+
+    private void showDate(int year, int month, int day) {
+        dobEt.setText(day+"/"+month+"/"+year);
     }
 }
