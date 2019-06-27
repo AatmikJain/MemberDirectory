@@ -39,7 +39,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         registerBtn.setOnClickListener(this);
 
         calendarIcon = findViewById(R.id.calendar_icon);
-//        calendarIcon.setOnClickListener(this);
 
         emailEt = findViewById(R.id.emailAddress);
         passwordEt = findViewById(R.id.password);
