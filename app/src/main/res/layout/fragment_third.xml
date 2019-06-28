@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SecondFragment"
+    android:gravity="center_vertical">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/organisationTIL"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+        <EditText
+            android:id="@+id/OrganisationEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_margin="@dimen/margin_large"
+            android:gravity="left"
+            android:hint="Organisation"
+            android:padding="@dimen/padding"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_large" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/positionTIL"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+        <EditText
+            android:id="@+id/positionEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_margin="@dimen/margin_large"
+            android:gravity="left"
+            android:hint="@string/degree"
+            android:padding="@dimen/padding"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_large" />
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/margin_large">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/fromTIL"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginTop="10dp">
+            <EditText
+                android:id="@+id/from"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="From"
+                android:enabled="false"
+                android:inputType="date" />
+        </android.support.design.widget.TextInputLayout>
+        <ImageView
+            android:id="@+id/from_calendar_icon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_date_range_black_24dp" />
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/toTIL"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginTop="10dp">
+            <EditText
+                android:id="@+id/to"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="To"
+                android:enabled="false"
+                android:inputType="date" />
+        </android.support.design.widget.TextInputLayout>
+        <ImageView
+            android:id="@+id/to_calendar_icon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_date_range_black_24dp" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/saveChanges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:background="@drawable/round_button"
+        android:padding="@dimen/padding_xlarge"
+        android:text="@string/save_changes"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_size_xlarge"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

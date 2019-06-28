@@ -1,17 +1,19 @@
 package com.example.aatmikjain.memberdirectory;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ViewAnimator;
 
 public class SplashActivity extends AppCompatActivity {
 
     private ImageView logo;
-    ViewAnimator animator;
     private static long SPLASH_TIME = 2000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
