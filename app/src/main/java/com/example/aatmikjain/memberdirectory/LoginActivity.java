@@ -1,6 +1,9 @@
 package com.example.aatmikjain.memberdirectory;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,11 +18,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText usernameEt;
     private EditText passwordEt;
     private TextView noAccYetTv, forgotPasswordTv;
+    SharedPreferences sharedPreferences;
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         mLoginBtn = findViewById(R.id.loginBtn);
         mLoginBtn.setOnClickListener(this);
 
@@ -38,6 +43,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         forgotPasswordTv = findViewById(R.id.forgotPassword);
         forgotPasswordTv.setOnClickListener(this);
 
+        sharedPreferences = getSharedPreferences("DIR", Context.MODE_PRIVATE);
+
+        databaseHelper = DatabaseHelper.getInstance(this);
 //        mLoginBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -96,9 +104,35 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             else
             {
-                Intent intent = new Intent(this, HomeActivity.class);
-//                intent.putExtra("Data:", "Hello World!");
-                startActivity(intent);
+
+                boolean flag=true;
+                Cursor cursor = databaseHelper.getDataFromUser();
+                cursor.moveToFirst();
+                do{
+                    String email = cursor.getString(3);
+                    String pass = cursor.getString(4);
+                    if(username.equalsIgnoreCase(email) && password.equalsIgnoreCase(pass))
+                    {
+                        flag=false;
+//                        cursor = databaseHelper.getNotification();
+//                        cursor.moveToFirst();
+//                        do{
+//                            Toast.makeText(this, cursor.getString(1), Toast.LENGTH_LONG).show();
+//                        }while(cursor.moveToNext());
+                        Intent intent = new Intent(this, HomeActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    else
+                        Toast.makeText(this, ""+email + " "+pass, Toast.LENGTH_LONG).show();
+                }while(cursor.moveToNext());
+
+
+//                sharedPreferences.edit().putString("email", username).commit();
+//
+//                Intent intent = new Intent(this, HomeActivity.class);
+////                intent.putExtra("Data:", "Hello World!");
+//                startActivity(intent);
             }
 
         }

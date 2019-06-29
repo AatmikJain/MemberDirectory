@@ -3,6 +3,7 @@ package com.example.aatmikjain.memberdirectory;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,10 +24,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView email;
+    DatabaseHelper databaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,26 +35,43 @@ public class HomeActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        SharedPreferences sp = getSharedPreferences("DIR", Context.MODE_PRIVATE);
-//        Toast.makeText(this, sp.getString("email", ""), Toast.LENGTH_LONG).show();
-
-        email = findViewById(R.id.emailTv);
-        String str = sp.getString("email", "");
-//        email.setText(str.toCharArray(), 0, str.length());
+//        SharedPreferences sp = getSharedPreferences("DIR", Context.MODE_PRIVATE);
+////        Toast.makeText(this, sp.getString("email", ""), Toast.LENGTH_LONG).show();
+//        email = findViewById(R.id.emailTv);
+//        String str = sp.getString("email", "");
+////        email.setText(str.toCharArray(), 0, str.length());
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, false));
 
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add("Student 1");
-        strings.add("Student 2");
-        strings.add("Student 3");
-        strings.add("Student 4");
-        strings.add("Student 5");
-        strings.add("Student 6");
-        strings.add("Student 7");
-        recyclerView.setAdapter(new MyAdapter(strings));
+        ArrayList<ArrayList<String>>  notificationData = new ArrayList<>();
+        databaseHelper = DatabaseHelper.getInstance(this);
+        Cursor cursor = databaseHelper.getNotification();
+//        if(cursor!=null) {
+            cursor.moveToFirst();
+            do {
+                ArrayList<String> notification = new ArrayList<>();
+                notification.add(cursor.getString(1));
+                notification.add(cursor.getString(2));
+                notification.add(cursor.getString(3));
+                notification.add(cursor.getString(4));
+                notification.add(cursor.getString(5));
+                //            notification.add(cursor.getString(6));
+                notificationData.add(notification);
+            } while (cursor.moveToNext());
+//        ArrayList<String> strings = new ArrayList<>();
+//        strings.add("Student 1");
+//        strings.add("Student 2");
+//        strings.add("Student 3");
+//        strings.add("Student 4");
+//        strings.add("Student 5");
+//        strings.add("Student 6");
+//        strings.add("Student 7");
 
+            MyAdapter myAdapter = new MyAdapter(notificationData);
+            recyclerView.setAdapter(myAdapter);
+            Toast.makeText(this, myAdapter.getItemCount() + "", Toast.LENGTH_LONG).show();
+//        }
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

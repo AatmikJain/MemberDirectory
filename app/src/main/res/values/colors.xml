@@ -4,7 +4,6 @@
     <color name="colorPrimaryDark">#1c7ee0</color>
     <color name="colorAccent">#0c074f</color>
     <color name="button">#372dca</color>
-    <color name="lightGrey">#a4a4a4</color>
     <color name="moderateGrey">#727272</color>
     <color name="darkGrey">#505050</color>
 </resources>

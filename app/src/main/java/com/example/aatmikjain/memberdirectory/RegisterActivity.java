@@ -2,7 +2,9 @@ package com.example.aatmikjain.memberdirectory;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -18,23 +22,26 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private final String TAG = "Register";
     private Button registerBtn;
-    private EditText emailEt, passwordEt, firstNameEt, lastNameEt, mobileNumberEt, cityEt, pincodeEt, dobEt;
+    private EditText emailEt, passwordEt, firstNameEt, lastNameEt, mobileNumberEt, branchEt, cityEt, pincodeEt, dobEt;
     private ImageView calendarIcon;
     private DatePicker datePicker;
     private Calendar calendar;
     private int year, month, day;
+    DatabaseHelper databaseHelper;
+    RadioGroup gender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
 //        try{
 //            String data = getIntent().getStringExtra("Data:");
 //            Toast.makeText(this, data, Toast.LENGTH_LONG);
 //            Log.i(TAG, data);
 //        }catch(Exception e){ e.printStackTrace();}
 
-
+//        component initialisation
         registerBtn = findViewById(R.id.register);
         registerBtn.setOnClickListener(this);
 
@@ -49,12 +56,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         pincodeEt = findViewById(R.id.pincode);
         dobEt = findViewById(R.id.dob);
         dobEt.setEnabled(false);
+        branchEt = findViewById(R.id.branch);
+        gender = findViewById(R.id.genderRg);
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
 //        showDate(year, month+1, day);
+
+        databaseHelper = DatabaseHelper.getInstance(this);
     }
     public void login(View v)
     {
@@ -93,10 +104,38 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             else if(pincode.length()!=6 || pincode.matches(".*\\D+.*"))
                 Toast.makeText(this,"Enter Valid Mobile Number", Toast.LENGTH_LONG).show();
-
+//            else if(!gender.isSelected())
+//                Toast.makeText(this,"Select Gender", Toast.LENGTH_LONG).show();
             else
-                startActivity(new Intent(this, HomeActivity.class));
-//                Toast.makeText(this, "Registration Successful", Toast.LENGTH_LONG).show();
+            {
+                int id = gender.getCheckedRadioButtonId();
+                String g;
+                if(id==R.id.male)
+                    g="M";
+                else if(id==R.id.female)
+                    g = "F";
+                else
+                    g="O";
+                UserTable inputData = new UserTable(
+                        firstNameEt.getText().toString(),
+                        lastNameEt.getText().toString(),
+                        emailEt.getText().toString(),
+                        passwordEt.getText().toString(),
+                        mobileNumberEt.getText().toString(),
+                        branchEt.getText().toString(),
+                        cityEt.getText().toString(),
+                        pincodeEt.getText().toString(),
+                        g,
+                        dobEt.getText().toString()
+                );
+                if(databaseHelper.addUserData(inputData)) {
+                    Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                }
+                else
+                    Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show();
+            }
 
         }
     }

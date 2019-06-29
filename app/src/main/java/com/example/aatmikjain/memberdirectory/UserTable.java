@@ -1,7 +1,6 @@
 package com.example.aatmikjain.memberdirectory;
 
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
 public class UserTable
 {
@@ -10,6 +9,7 @@ public class UserTable
     private String firstName = "firstName";
     private String lastName = "lastName";
     private String email = "email";
+    private String password = "password";
     private String mobile = "mobile";
     private String branch = "branch";
     private String city = "city";
@@ -19,26 +19,16 @@ public class UserTable
 
     public UserTable(SQLiteDatabase sqLiteDatabase)
     {
-        String sql = "Create table " + tableName +" ( " +
-//                id + " integer primary key autoincrement, " +
-                firstName + " varchar(20), " +
-                lastName + " varchar(20), " +
-                email + " varchar(30), " +
-                mobile + " varchar(10), " +
-                branch + " varchar(20), " +
-                city + " varchar(20), " +
-                pincode + " varchar(6), " +
-                gender + " varchar(1), " +
-                dob + " varchar(10));";
-//        Toast.makeText(this, ""+sqLiteDatabase.getPath(), Toast.LENGTH_LONG).show();
+        String sql = "Create table " + tableName +" ( " + id + " integer primary key autoincrement, " + firstName + " varchar(20), " + lastName + " varchar(20), " + email + " varchar(30), "+ password + " varchar(30), " + mobile + " varchar(10), " + branch + " varchar(20), " + city + " varchar(20), " + pincode + " varchar(6), " + gender + " varchar(1), " + dob + " date);";
         sqLiteDatabase.execSQL(sql);
 
     }
 
-    public UserTable( String firstName, String lastName, String email, String mobile, String branch, String city, String pincode, String gender, String dob) {
+    public UserTable( String firstName, String lastName, String email, String password, String mobile, String branch, String city, String pincode, String gender, String dob) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
         this.mobile = mobile;
         this.branch = branch;
         this.city = city;
@@ -132,6 +122,14 @@ public class UserTable
 
     public String getDob() {
         return dob;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setDob(String dob) {

@@ -13,19 +13,23 @@ import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
-    private ArrayList<String> stringArrayList = new ArrayList<>();
-    public MyAdapter(ArrayList<String> stringArrayList)
+    private ArrayList<ArrayList<String>> stringArrayList = new ArrayList<ArrayList<String>>();
+    public MyAdapter(ArrayList<ArrayList<String>> stringArrayList)
     {
         this.stringArrayList = stringArrayList;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder
     {
-        static TextView TitleTv;
+        static TextView titleTv, summaryTv, startDateTv, endDateTv, domainTv;
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
-            TitleTv = itemView.findViewById(R.id.Title);
+            titleTv = itemView.findViewById(R.id.Title);
+            domainTv = itemView.findViewById(R.id.domain);
+            summaryTv = itemView.findViewById(R.id.summary);
+            startDateTv = itemView.findViewById(R.id.startDate);
+            endDateTv = itemView.findViewById(R.id.endDate);
         }
     }
 
@@ -39,7 +43,12 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        ViewHolder.TitleTv.setText(stringArrayList.get(i));
+        ViewHolder.titleTv.setText(stringArrayList.get(i).get(0));
+        ViewHolder.domainTv.setText(stringArrayList.get(i).get(1));
+        ViewHolder.summaryTv.setText(stringArrayList.get(i).get(2));
+        ViewHolder.startDateTv.setText(stringArrayList.get(i).get(3));
+        ViewHolder.endDateTv.setText(stringArrayList.get(i).get(4));
+
     }
 
     @Override
