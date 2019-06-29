@@ -22,22 +22,22 @@ import java.util.Calendar;
 
 public class FirstFragment extends Fragment {
 
-    private Button saveChangesBtn, uploadPhotoBtn;
-    private EditText firstNameEt, lastNameEt, mobileNumberEt, dobEt, cityEt, pincodeEt;
-    private RadioButton maleRb, femaleRb;
-    private ImageView cal_icon, profilePhotoIv;
-    private Calendar calendar;
-    private int year, month, day;
-
-    private File mImageFile;
-    private Uri mImageUri;
-    int PERMISSIONS_MULTIPLE_REQUEST = 100;
-    String[] stringsPermission = {
-            Manifest.permission
-                    .READ_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
+//    private Button saveChangesBtn, uploadPhotoBtn;
+//    private EditText firstNameEt, lastNameEt, mobileNumberEt, dobEt, cityEt, pincodeEt;
+//    private RadioButton maleRb, femaleRb;
+//    private ImageView cal_icon, profilePhotoIv;
+//    private Calendar calendar;
+//    private int year, month, day;
+//
+//    private File mImageFile;
+//    private Uri mImageUri;
+//    int PERMISSIONS_MULTIPLE_REQUEST = 100;
+//    String[] stringsPermission = {
+//            Manifest.permission
+//                    .READ_EXTERNAL_STORAGE,
+//            Manifest.permission.CAMERA,
+//            Manifest.permission.WRITE_EXTERNAL_STORAGE
+//    };
 
     public FirstFragment() {
         // Required empty public constructor
@@ -47,14 +47,14 @@ public class FirstFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        firstNameEt = getView().findViewById(R.id.firstName);
-        lastNameEt = getView().findViewById(R.id.lastName);
-        lastNameEt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),""+firstNameEt.getText().toString(), Toast.LENGTH_LONG).show();
-            }
-        });
+//        firstNameEt = getView().findViewById(R.id.firstName);
+//        lastNameEt = getView().findViewById(R.id.lastName);
+//        lastNameEt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getContext(),""+firstNameEt.getText().toString(), Toast.LENGTH_LONG).show();
+//            }
+//        });
 
 //        calendar = Calendar.getInstance();
 //        year = calendar.get(Calendar.YEAR);
