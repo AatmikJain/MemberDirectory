@@ -1,4 +1,4 @@
-package com.example.aatmikjain.memberdirectory;
+package Tables;
 
 import android.database.sqlite.SQLiteDatabase;
 
@@ -14,7 +14,6 @@ public class NotificationTable
 
     public NotificationTable(SQLiteDatabase sqLiteDatabase)
     {
-        UserTable userTable = new UserTable();
         String sql = "create table "+ tableName +" ( "+
                 title + " varchar(20), "+
                 domain + " varchar(30), "+

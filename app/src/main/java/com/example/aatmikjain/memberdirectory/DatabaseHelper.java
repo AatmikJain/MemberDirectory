@@ -3,10 +3,14 @@ package com.example.aatmikjain.memberdirectory;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
+
+import Tables.EducationalDetailsTable;
+import Tables.LoginTable;
+import Tables.NotificationTable;
+import Tables.ProfessionalDetailsTable;
+import Tables.UserTable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static String dbName = "data_dir";
@@ -65,6 +69,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public Cursor getEducationalDetails(){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        EducationalDetailsTable educationalDetailsTable = new EducationalDetailsTable();
+        return sqLiteDatabase.rawQuery("Select * from "+ educationalDetailsTable.getTableName()+";", null);
+    }
+
     public boolean addProfessionalDetails(ProfessionalDetailsTable professionalDetailsTable)
     {
         try {
@@ -86,6 +96,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
             return false;
         }
+    }
+    public Cursor getProfessionalDetails(){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ProfessionalDetailsTable professionalDetailsTable = new ProfessionalDetailsTable();
+        return sqLiteDatabase.rawQuery("Select * from "+ professionalDetailsTable.getTableName()+";", null);
     }
 
     public boolean addNotification(NotificationTable notificationTable)
@@ -115,9 +130,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         NotificationTable notificationTable = new NotificationTable();
-//        long count = DatabaseUtils.queryNumEntries(sqLiteDatabase, notificationTable.getTableName());
-//        if(count==0)
-//            return null;
         return sqLiteDatabase.rawQuery("Select * from "+notificationTable.getTableName()+";", null);
     }
 
@@ -152,6 +164,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         UserTable userTable = new UserTable();
         return sqLiteDatabase.rawQuery("Select * from "+ userTable.getTableName()+";", null);
+    }
+
+    public boolean updateUserData(UserTable userTable)
+    {
+        try {
+            UserTable keyUserName = new UserTable();
+            SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(keyUserName.getFirstName(), userTable.getFirstName());
+            contentValues.put(keyUserName.getLastName(), userTable.getLastName());
+            contentValues.put(keyUserName.getMobile(), userTable.getMobile());
+            contentValues.put(keyUserName.getBranch(), userTable.getBranch());
+            contentValues.put(keyUserName.getCity(), userTable.getCity());
+            contentValues.put(keyUserName.getPincode(), userTable.getPincode());
+            contentValues.put(keyUserName.getDob(), userTable.getDob());
+            sqLiteDatabase.update(keyUserName.getTableName(), contentValues, "id=?",new String[]{userTable.getId()});
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public SQLiteDatabase getMyWritableDatabase()

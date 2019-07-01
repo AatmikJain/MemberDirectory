@@ -23,18 +23,17 @@
         app:srcCompat="@drawable/sgsits_logo" />
 
     <TextView
-        android:id="@+id/emailTv"
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:textColor="@android:color/black"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-    <!--<TextView-->
-        <!--android:id="@+id/textView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textColor="@android:color/black"-->
-        <!--android:text="@string/nav_header_subtitle" />-->
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"/>
 
 </LinearLayout>

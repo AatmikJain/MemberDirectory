@@ -1,4 +1,4 @@
-package com.example.aatmikjain.memberdirectory;
+package Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,13 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.aatmikjain.memberdirectory.HomeActivity;
+import com.example.aatmikjain.memberdirectory.R;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
     private ArrayList<ArrayList<String>> stringArrayList = new ArrayList<ArrayList<String>>();
-    public MyAdapter(ArrayList<ArrayList<String>> stringArrayList)
+    public NotificationAdapter(ArrayList<ArrayList<String>> stringArrayList)
     {
         this.stringArrayList = stringArrayList;
     }
@@ -25,11 +29,11 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
-            titleTv = itemView.findViewById(R.id.Title);
-            domainTv = itemView.findViewById(R.id.domain);
+            titleTv = itemView.findViewById(R.id.title);
+//            domainTv = itemView.findViewById(R.id.domain);
             summaryTv = itemView.findViewById(R.id.summary);
-            startDateTv = itemView.findViewById(R.id.startDate);
-            endDateTv = itemView.findViewById(R.id.endDate);
+//            startDateTv = itemView.findViewById(R.id.startDate);
+//            endDateTv = itemView.findViewById(R.id.endDate);
         }
     }
 
@@ -43,11 +47,12 @@ public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+//       Toast.makeText(, stringArrayList.get(0).get(0), Toast.LENGTH_LONG).show();
         ViewHolder.titleTv.setText(stringArrayList.get(i).get(0));
-        ViewHolder.domainTv.setText(stringArrayList.get(i).get(1));
+//        ViewHolder.domainTv.setText("Domain:\n"+stringArrayList.get(i).get(1));
         ViewHolder.summaryTv.setText(stringArrayList.get(i).get(2));
-        ViewHolder.startDateTv.setText(stringArrayList.get(i).get(3));
-        ViewHolder.endDateTv.setText(stringArrayList.get(i).get(4));
+//        ViewHolder.startDateTv.setText("From:\n"+stringArrayList.get(i).get(3));
+//        ViewHolder.endDateTv.setText("To:\n"+stringArrayList.get(i).get(4));
 
     }
 

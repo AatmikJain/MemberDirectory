@@ -2,7 +2,6 @@ package com.example.aatmikjain.memberdirectory;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.Calendar;
+
+import Tables.NotificationTable;
 
 public class NotificationActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -102,6 +103,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                 Toast.makeText(this, "Enter Description", Toast.LENGTH_LONG).show();
             else
             {
+
                 NotificationTable inputNotification = new NotificationTable(
                         titleEt.getText().toString(),
                         descriptionEt.getText().toString(),
@@ -115,6 +117,11 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                 {
                     Toast.makeText(this, "Notification added successfully", Toast.LENGTH_LONG).show();
                     titleEt.setText("");
+                    descriptionEt.setText("");
+                    summaryEt.setText("");
+                    domainEt.setText("");
+                    startDateEt.setText("");
+                    endDateEt.setText("");
                 }
                 else
                     Toast.makeText(this, "Failed to add Notification", Toast.LENGTH_LONG).show();

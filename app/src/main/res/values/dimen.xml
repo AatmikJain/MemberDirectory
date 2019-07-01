@@ -10,6 +10,7 @@
     <dimen name = "margin_large">10sp</dimen>
     <dimen name = "margin_xlarge">15sp</dimen>
     <dimen name = "margin_xxlarge">20sp</dimen>
+    <dimen name = "margin_xxxlarge">28sp</dimen>
 
     <dimen name = "text_size">12sp</dimen>
     <dimen name = "text_size_large">18sp</dimen>
