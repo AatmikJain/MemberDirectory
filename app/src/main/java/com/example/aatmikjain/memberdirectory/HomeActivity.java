@@ -37,7 +37,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     FloatingActionButton floatingActionButtonFab;
     DatabaseHelper databaseHelper;
     Cursor cursor;
-    NotificationTable notificationTable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

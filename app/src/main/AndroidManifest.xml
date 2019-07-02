@@ -41,7 +41,6 @@
         <activity
             android:name=".ChangePasswordActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ForgotPasswordActivity"
             android:screenOrientation="portrait" />
@@ -58,7 +57,9 @@
         <activity android:name=".NotificationActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".AboutActivity" />
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".AudioActivity" />
+        <activity android:name=".VideoActivity"></activity>
     </application>
 
 </manifest>

@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import Tables.UserTable;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button mLoginBtn;
@@ -90,45 +92,45 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             else if(password.isEmpty())
                 Toast.makeText(this,"Enter Password", Toast.LENGTH_LONG).show();
 
-            //Length of inputs < 6
-            else if(username.length()<6 || password.length()<6)
-                Toast.makeText(this,"Username and Password should have at least 6 characters", Toast.LENGTH_LONG).show();
-
-            //Username should start with an alphabet
-            else if((username.charAt(0)>90 && username.charAt(0)<97) || username.charAt(0)<65 || username.charAt(0)>122 )
-                Toast.makeText(this,"Enter valid username\nUsername can only start with an alphabet", Toast.LENGTH_LONG).show();
-
-            //Password should contain at least 1 alphabet and 1 number
-            else if(!password.matches(".*\\d+.*") || !password.matches(".*[a-zA-Z].*"))
-                Toast.makeText(this,"Enter valid password\nPassword should contain at least 1 alphabet and 1 number", Toast.LENGTH_LONG).show();
-
             else
             {
-
-                boolean flag=true;
+                boolean flag=false;
+                String email, pass;
+                UserTable userTable = new UserTable();
                 Cursor cursor = databaseHelper.getDataFromUser();
-                cursor.moveToFirst();
-                do{
-                    String email = cursor.getString(3);
-                    String pass = cursor.getString(4);
-                    if(username.equalsIgnoreCase(email) && password.equalsIgnoreCase(pass))
+                if(cursor!=null)
+                {
+                    if(cursor.getCount()>0)
                     {
-                        flag=false;
-//                        cursor = databaseHelper.getNotification();
-//                        cursor.moveToFirst();
-//                        do{
-//                            Toast.makeText(this, cursor.getString(1), Toast.LENGTH_LONG).show();
-//                        }while(cursor.moveToNext());
-                        Intent intent = new Intent(this, HomeActivity.class);
-                        startActivity(intent);
-                        break;
+                        cursor.moveToFirst();
+                        do{
+                            email = cursor.getString(cursor.getColumnIndex(userTable.getEmail()));
+                            pass = cursor.getString(cursor.getColumnIndex(userTable.getPassword()));
+                            if(username.equalsIgnoreCase(email) && password.equalsIgnoreCase(pass))
+                            {
+                                flag=true;
+                                break;
+                            }
+                        }while(cursor.moveToNext());
+
+                        if(flag)
+                        {
+                            String firstName = cursor.getString(cursor.getColumnIndex(userTable.getFirstName())), lastEdit = cursor.getString(cursor.getColumnIndex(userTable.getLastEdit()));
+                            sharedPreferences.edit().putString("firstName", firstName).commit();
+                            sharedPreferences.edit().putString("email", email).commit();
+                            sharedPreferences.edit().putString("lastEdit", lastEdit).commit();
+                            Intent intent = new Intent(this, HomeActivity.class);
+                            startActivity(intent);
+                        }
+                        else
+                            Toast.makeText(this, "Email/Password incorrect", Toast.LENGTH_LONG).show();
                     }
                     else
-                        Toast.makeText(this, ""+email + " "+pass, Toast.LENGTH_LONG).show();
-                }while(cursor.moveToNext());
+                        Toast.makeText(this, "Empty Table", Toast.LENGTH_LONG).show();
+                }
+                else
+                    Toast.makeText(this, "null cursor", Toast.LENGTH_LONG).show();
 
-
-//                sharedPreferences.edit().putString("email", username).commit();
 //
 //                Intent intent = new Intent(this, HomeActivity.class);
 ////                intent.putExtra("Data:", "Hello World!");

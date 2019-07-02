@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import Tables.EditLogTable;
 import Tables.EducationalDetailsTable;
 import Tables.LoginTable;
 import Tables.NotificationTable;
@@ -37,6 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         new EducationalDetailsTable(sqLiteDatabase);
         new ProfessionalDetailsTable(sqLiteDatabase);
         new NotificationTable(sqLiteDatabase);
+        new EditLogTable(sqLiteDatabase);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             ContentValues contentValues = new ContentValues();
             contentValues.put(keyCustID.getTableName(), educationalDetailsTable.getTableName());
-            contentValues.put(keyCustID.getCustomerID(), educationalDetailsTable.getCustomerID());
+            contentValues.put(keyCustID.getEmail(), educationalDetailsTable.getEmail());
             contentValues.put(keyCustID.getInstituteName(), educationalDetailsTable.getInstituteName());
             contentValues.put(keyCustID.getDegree(), educationalDetailsTable.getDegree());
             contentValues.put(keyCustID.getBoard_University(), educationalDetailsTable.getBoard_University());
@@ -83,7 +85,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             ContentValues contentValues = new ContentValues();
             contentValues.put(keyCustID.getTableName(), professionalDetailsTable.getTableName());
-            contentValues.put(keyCustID.getCustomerID(), professionalDetailsTable.getCustomerID());
+            contentValues.put(keyCustID.getEmail(), professionalDetailsTable.getEmail());
             contentValues.put(keyCustID.getCompanyName(), professionalDetailsTable.getCompanyName());
             contentValues.put(keyCustID.getPosition(), professionalDetailsTable.getPosition());
             contentValues.put(keyCustID.getEndDate(), professionalDetailsTable.getEndDate());
@@ -149,6 +151,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             contentValues.put(keyUserName.getPincode(), userTable.getPincode());
             contentValues.put(keyUserName.getGender(), userTable.getGender());
             contentValues.put(keyUserName.getBranch(), userTable.getBranch());
+            contentValues.put(keyUserName.getLastEdit(), userTable.getLastEdit());
 
             sqLiteDatabase.insert(keyUserName.getTableName(), null, contentValues);
             return true;
@@ -179,12 +182,59 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             contentValues.put(keyUserName.getCity(), userTable.getCity());
             contentValues.put(keyUserName.getPincode(), userTable.getPincode());
             contentValues.put(keyUserName.getDob(), userTable.getDob());
-            sqLiteDatabase.update(keyUserName.getTableName(), contentValues, "id=?",new String[]{userTable.getId()});
+            contentValues.put(keyUserName.getLastEdit(), userTable.getLastEdit());
+            sqLiteDatabase.update(keyUserName.getTableName(), contentValues, "email=?",new String[]{userTable.getEmail()});
             return true;
         }catch (Exception e){
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean addLoginData(LoginTable loginTable)
+    {
+        try{
+            LoginTable keyUserName = new LoginTable();
+            SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(keyUserName.getUsername(), loginTable.getUsername());
+            contentValues.put(keyUserName.getPassword(), loginTable.getPassword());
+            sqLiteDatabase.insert(keyUserName.getTableName(), null, contentValues);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Cursor getLoginData()
+    {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        LoginTable loginTable = new LoginTable();
+        return sqLiteDatabase.rawQuery("Select * from "+loginTable.getTableName()+";", null);
+    }
+
+    public boolean addEditLog(EditLogTable editLogTable)
+    {
+        try {
+            EditLogTable keyUserName = new EditLogTable();
+            SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(keyUserName.getEmail(), editLogTable.getEmail());
+            contentValues.put(keyUserName.getLastEdit(), editLogTable.getLastEdit());
+            sqLiteDatabase.insert(keyUserName.getTableName(), null, contentValues);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Cursor getEditLog()
+    {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        EditLogTable editLogTable = new EditLogTable();
+        return sqLiteDatabase.rawQuery("Select * from "+editLogTable.getTableName()+";", null);
     }
 
     public SQLiteDatabase getMyWritableDatabase()

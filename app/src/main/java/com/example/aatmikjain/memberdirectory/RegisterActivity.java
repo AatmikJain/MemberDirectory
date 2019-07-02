@@ -2,9 +2,7 @@ package com.example.aatmikjain.memberdirectory;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,11 +10,18 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+import Tables.EditLogTable;
+import Tables.LoginTable;
+import Tables.UserTable;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -28,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Calendar calendar;
     private int year, month, day;
     DatabaseHelper databaseHelper;
-    RadioGroup gender;
+    RadioGroup genderRg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         dobEt = findViewById(R.id.dob);
         dobEt.setEnabled(false);
         branchEt = findViewById(R.id.branch);
-        gender = findViewById(R.id.genderRg);
+        genderRg = findViewById(R.id.genderRg);
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -78,7 +83,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if(v.getId()==R.id.register)
         {
             String email = emailEt.getText().toString(), password = passwordEt.getText().toString(), firstName = firstNameEt.getText().toString(),
-                    lastName = lastNameEt.getText().toString(), mobileNumber = mobileNumberEt.getText().toString(), city = cityEt.getText().toString(), pincode = pincodeEt.getText().toString();
+                    lastName = lastNameEt.getText().toString(), mobileNumber = mobileNumberEt.getText().toString(), branch = branchEt.getText().toString(), city = cityEt.getText().toString(), pincode = pincodeEt.getText().toString();
 
             if(email.isEmpty())
                 Toast.makeText(this,"Enter Email Address", Toast.LENGTH_LONG).show();
@@ -92,6 +97,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(this,"Enter City", Toast.LENGTH_LONG).show();
             else if(pincode.isEmpty())
                 Toast.makeText(this,"Enter Pincode", Toast.LENGTH_LONG).show();
+
+                //Length of inputs < 6
+            else if(email.length()<6 || password.length()<6)
+                Toast.makeText(this,"Username and Password should have at least 6 characters", Toast.LENGTH_LONG).show();
 
             else if(!email.contains("@") || !email.contains(".") || email.lastIndexOf('.')<email.indexOf('@') || email.lastIndexOf('.')==email.length()-1 || email.lastIndexOf('.') - email.indexOf('@') <=2)
                 Toast.makeText(this,"Enter Valid Email Address", Toast.LENGTH_LONG).show();
@@ -108,7 +117,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 //                Toast.makeText(this,"Select Gender", Toast.LENGTH_LONG).show();
             else
             {
-                int id = gender.getCheckedRadioButtonId();
+                int id = genderRg.getCheckedRadioButtonId();
+                String currentDateTimeString = getDateTime();
                 String g;
                 if(id==R.id.male)
                     g="M";
@@ -116,22 +126,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     g = "F";
                 else
                     g="O";
-                UserTable inputData = new UserTable(
-                        firstNameEt.getText().toString(),
-                        lastNameEt.getText().toString(),
-                        emailEt.getText().toString(),
-                        passwordEt.getText().toString(),
-                        mobileNumberEt.getText().toString(),
-                        branchEt.getText().toString(),
-                        cityEt.getText().toString(),
-                        pincodeEt.getText().toString(),
-                        g,
-                        dobEt.getText().toString()
-                );
+                UserTable inputData = new UserTable(firstName, lastName, email, password, mobileNumber, branch, city, pincode, g, dobEt.getText().toString(), currentDateTimeString);
                 if(databaseHelper.addUserData(inputData)) {
-                    Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(this, LoginActivity.class);
-                    startActivity(intent);
+                    if(databaseHelper.addLoginData(new LoginTable(email, password))) {
+                        if (databaseHelper.addEditLog(new EditLogTable(email, currentDateTimeString))) {
+                            Toast.makeText(this, "Registration Successful", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(this, LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    }
                 }
                 else
                     Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show();
@@ -140,8 +143,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-
-    @SuppressWarnings("deprecation")
+    private String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
     public void setDate(View view) {
         showDialog(999);
 //        Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT).show();
@@ -149,7 +156,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     protected Dialog onCreateDialog(int id) {
-        // TODO Auto-generated method stub
         if (id == 999) {
             return new DatePickerDialog(this, myDateListener, year, month, day);
         }
@@ -160,10 +166,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void onDateSet(DatePicker arg0,
                                       int arg1, int arg2, int arg3) {
-                    // TODO Auto-generated method stub
-                     year = arg1;
+                     /*year = arg1;
                      month = arg2+1;
-                     day = arg3;
+                     day = arg3;*/
                     showDate(arg1, arg2+1, arg3);
                 }
             };
