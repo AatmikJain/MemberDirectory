@@ -32,7 +32,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             titleTv = itemView.findViewById(R.id.title);
 //            domainTv = itemView.findViewById(R.id.domain);
             summaryTv = itemView.findViewById(R.id.summary);
-//            startDateTv = itemView.findViewById(R.id.startDate);
+            startDateTv = itemView.findViewById(R.id.startDate);
 //            endDateTv = itemView.findViewById(R.id.endDate);
         }
     }
@@ -51,7 +51,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ViewHolder.titleTv.setText(stringArrayList.get(i).get(0));
 //        ViewHolder.domainTv.setText("Domain:\n"+stringArrayList.get(i).get(1));
         ViewHolder.summaryTv.setText(stringArrayList.get(i).get(2));
-//        ViewHolder.startDateTv.setText("From:\n"+stringArrayList.get(i).get(3));
+        ViewHolder.startDateTv.setText("From:\n"+stringArrayList.get(i).get(3));
 //        ViewHolder.endDateTv.setText("To:\n"+stringArrayList.get(i).get(4));
 
     }

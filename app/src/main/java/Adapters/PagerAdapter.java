@@ -1,12 +1,16 @@
-package com.example.aatmikjain.memberdirectory;
+package Adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.aatmikjain.memberdirectory.FirstFragment;
+import com.example.aatmikjain.memberdirectory.SecondFragment;
+import com.example.aatmikjain.memberdirectory.ThirdFragment;
+
 public class PagerAdapter extends FragmentPagerAdapter {
     int numberOfTabs;
-    PagerAdapter(FragmentManager fm, int numOfTabs)
+    public PagerAdapter(FragmentManager fm, int numOfTabs)
     {
         super(fm);
         this.numberOfTabs = numOfTabs;
