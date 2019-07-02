@@ -17,16 +17,17 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_xxlarge"
-            android:layout_marginRight="@dimen/margin_xxlarge"
+            android:layout_marginLeft="@dimen/margin_xxxlarge"
+            android:layout_marginRight="@dimen/margin_xxxlarge"
             android:layout_marginTop="@dimen/margin_large"
             android:gravity="left"
             android:hint="@string/title"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding_large"
             android:singleLine="true"
             android:maxLength="20"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_large" />
+            android:textSize="@dimen/text_size_large"
+            android:background="@drawable/round_edittext"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/domainTIL"
@@ -37,16 +38,17 @@
             android:id="@+id/domain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_xxlarge"
-            android:layout_marginRight="@dimen/margin_xxlarge"
+            android:layout_marginLeft="@dimen/margin_xxxlarge"
+            android:layout_marginRight="@dimen/margin_xxxlarge"
             android:layout_marginTop="@dimen/margin_large"
             android:gravity="left"
             android:hint="@string/domain"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding_large"
             android:singleLine="true"
             android:maxLength="30"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_large" />
+            android:textSize="@dimen/text_size_large"
+            android:background="@drawable/round_edittext"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/summaryTIL"
@@ -57,16 +59,17 @@
             android:id="@+id/summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_xxlarge"
-            android:layout_marginRight="@dimen/margin_xxlarge"
+            android:layout_marginLeft="@dimen/margin_xxxlarge"
+            android:layout_marginRight="@dimen/margin_xxxlarge"
             android:layout_marginTop="@dimen/margin_large"
             android:gravity="left"
             android:hint="@string/summary"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding_large"
             android:singleLine="true"
             android:maxLength="50"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_large" />
+            android:textSize="@dimen/text_size_large"
+            android:background="@drawable/round_edittext"/>
     </android.support.design.widget.TextInputLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -82,21 +85,24 @@
                     android:id="@+id/startDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_xxlarge"
-                    android:layout_marginRight="@dimen/margin_xxlarge"
+                    android:layout_marginLeft="@dimen/margin_xxxlarge"
+                    android:layout_marginRight="@dimen/margin"
                     android:layout_marginTop="@dimen/margin_large"
                     android:gravity="left"
                     android:enabled="false"
                     android:hint="@string/start_date"
-                    android:padding="@dimen/padding"
+                    android:padding="@dimen/padding_large"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_large"
+                android:background="@drawable/round_edittext"/>
         </android.support.design.widget.TextInputLayout>
         <ImageView
             android:id="@+id/startDateIv"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_large"
+            android:padding="@dimen/padding"
             android:onClick="setDate"
             android:src="@drawable/ic_date_range_black_24dp"/>
     </LinearLayout>
@@ -114,21 +120,24 @@
                 android:id="@+id/endDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_xxlarge"
-                android:layout_marginRight="@dimen/margin_xxlarge"
+                android:layout_marginLeft="@dimen/margin_xxxlarge"
+                android:layout_marginRight="@dimen/margin"
                 android:layout_marginTop="@dimen/margin_large"
                 android:gravity="left"
                 android:enabled="false"
                 android:hint="@string/end_date"
-                android:padding="@dimen/padding"
+                android:padding="@dimen/padding_large"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/text_size_large" />
+                android:textSize="@dimen/text_size_large"
+                android:background="@drawable/round_edittext"/>
         </android.support.design.widget.TextInputLayout>
         <ImageView
             android:id="@+id/endDateIv"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_large"
+            android:padding="@dimen/padding"
             android:onClick="setDate"
             android:src="@drawable/ic_date_range_black_24dp"/>
     </LinearLayout>
@@ -142,14 +151,15 @@
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="148dp"
-            android:layout_marginLeft="@dimen/margin_xxlarge"
+            android:layout_marginLeft="@dimen/margin_xxxlarge"
             android:layout_marginTop="@dimen/margin_large"
-            android:layout_marginRight="@dimen/margin_xxlarge"
+            android:layout_marginRight="@dimen/margin_xxxlarge"
             android:gravity="left"
             android:hint="@string/description"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding_xlarge"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_large" />
+            android:textSize="@dimen/text_size_large"
+            android:background="@drawable/round_edittext"/>
     </android.support.design.widget.TextInputLayout>
     <Button
         android:id="@+id/add"
