@@ -1,4 +1,4 @@
-package com.example.aatmikjain.memberdirectory;
+package Tables;
 
 import android.database.sqlite.SQLiteDatabase;
 

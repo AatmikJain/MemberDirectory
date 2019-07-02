@@ -1,12 +1,12 @@
-package com.example.aatmikjain.memberdirectory;
+package Tables;
 
 import android.database.sqlite.SQLiteDatabase;
-//import com.example.aatmikjain.memberdirectory.UserTable;
+//import Tables.UserTable;
 
 public class EducationalDetailsTable
 {
     private String tableName = "EducationalDetailsTable";
-    private String customerID = "CustomerID";
+    private String email = "Email";
     private String instituteName = "InstituteName";
     private String degree = "Degree";
     private String board_University = "Board_University";
@@ -18,19 +18,20 @@ public class EducationalDetailsTable
     {
         UserTable userTable = new UserTable();
         String sql = "create table "+tableName+" ( "+
-        customerID + " int(7), " +
+        email + " varchar(30), " +
         instituteName + " varchar(50), " +
         degree + " varchar(20), " +
         board_University + " varchar(30), " +
         start_Date + " date, " +
         end_Date + " date, " +
         result + " varchar(8), " +
-        "foreign key ("+customerID+") references " +userTable.getTableName()+"("+userTable.getId()+"));";
+        "foreign key ("+email+") references " +userTable.getTableName()+"("+userTable.getEmail()+"));";
 
         sqLiteDatabase.execSQL(sql);
     }
 
-    public EducationalDetailsTable(String instituteName, String degree, String board_University, String start_Date, String end_Date, String result) {
+    public EducationalDetailsTable(String email, String instituteName, String degree, String board_University, String start_Date, String end_Date, String result) {
+        this.email = email;
         this.instituteName = instituteName;
         this.degree = degree;
         this.board_University = board_University;
@@ -46,8 +47,8 @@ public class EducationalDetailsTable
         return tableName;
     }
 
-    public String getCustomerID() {
-        return customerID;
+    public String getEmail() {
+        return email;
     }
 
     public String getInstituteName() {

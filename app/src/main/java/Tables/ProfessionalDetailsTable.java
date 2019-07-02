@@ -1,11 +1,11 @@
-package com.example.aatmikjain.memberdirectory;
+package Tables;
 
 import android.database.sqlite.SQLiteDatabase;
 
 public class ProfessionalDetailsTable
 {
     private String tableName = "ProfessionalDetailsTable";
-    private String customerID = "CustomerID";
+    private String email = "Email";
     private String companyName = "CompanyName";
     private String position  = "Position";
     private String joinDate = "JoinDate";
@@ -15,17 +15,17 @@ public class ProfessionalDetailsTable
     {
         UserTable userTable = new UserTable();
         String sql = "Create table " + tableName + " ( "+
-                customerID + " int(7), " +
+                email + " varchar(30), " +
                 companyName + " varchar(30), "+
                 position + " varchar(20), "+
                 joinDate + " date, "+
                 endDate + " date, " +
-                "foreign key (" + customerID + ") references " + userTable.getTableName()+"("+userTable.getId()+"));";
+                "foreign key (" + email + ") references " + userTable.getTableName()+"("+userTable.getEmail()+"));";
         sqLiteDatabase.execSQL(sql);
     }
 
-    public ProfessionalDetailsTable(String companyName, String position, String joinDate, String endDate) {
-
+    public ProfessionalDetailsTable(String email, String companyName, String position, String joinDate, String endDate) {
+        this.email = email;
         this.companyName = companyName;
         this.position = position;
         this.joinDate = joinDate;
@@ -41,8 +41,8 @@ public class ProfessionalDetailsTable
         return tableName;
     }
 
-    public String getCustomerID() {
-        return customerID;
+    public String getEmail() {
+        return email;
     }
 
     public String getCompanyName() {
