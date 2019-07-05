@@ -13,16 +13,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
         <EditText
-            android:id="@+id/instituteNameEt"
+            android:id="@+id/instituteName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:layout_margin="@dimen/margin_large"
+            android:layout_marginLeft="@dimen/margin_xxlarge"
+            android:layout_marginRight="@dimen/margin_xxlarge"
             android:gravity="left"
             android:hint="@string/institute_name"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding_large"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_large" />
+            android:textSize="@dimen/text_size_large"
+            android:background="@drawable/round_edittext"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -31,16 +33,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
         <EditText
-            android:id="@+id/degreeEt"
+            android:id="@+id/degree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:layout_margin="@dimen/margin_large"
+            android:layout_marginLeft="@dimen/margin_xxlarge"
+            android:layout_marginRight="@dimen/margin_xxlarge"
             android:gravity="left"
-            android:hint="@string/degree"
-            android:padding="@dimen/padding"
+            android:hint="@string/degree_class"
+            android:padding="@dimen/padding_large"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_large" />
+            android:textSize="@dimen/text_size_large"
+            android:background="@drawable/round_edittext"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -49,72 +53,103 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
         <EditText
-            android:id="@+id/boardUniversityEt"
+            android:id="@+id/boardUniversity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:layout_margin="@dimen/margin_large"
+            android:layout_marginLeft="@dimen/margin_xxlarge"
+            android:layout_marginRight="@dimen/margin_xxlarge"
             android:gravity="left"
             android:hint="Board/University"
-            android:padding="@dimen/padding"
+            android:padding="@dimen/padding_large"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_large" />
+            android:textSize="@dimen/text_size_large"
+            android:background="@drawable/round_edittext"/>
     </android.support.design.widget.TextInputLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="@dimen/margin_large">
+        android:layout_marginTop="@dimen/margin_large">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/fromTIL"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:layout_marginTop="10dp">
+            android:layout_weight="3">
             <EditText
                 android:id="@+id/from"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_xxlarge"
+                android:layout_marginRight="@dimen/margin"
+                android:padding="@dimen/padding_large"
                 android:hint="From"
                 android:enabled="false"
-                android:inputType="date" />
+                android:inputType="date"
+                android:background="@drawable/round_edittext"/>
         </android.support.design.widget.TextInputLayout>
         <ImageView
             android:id="@+id/from_calendar_icon"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
             android:src="@drawable/ic_date_range_black_24dp" />
         <android.support.design.widget.TextInputLayout
             android:id="@+id/toTIL"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:layout_marginTop="10dp">
+            android:layout_weight="3">
             <EditText
                 android:id="@+id/to"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:padding="@dimen/padding_large"
                 android:hint="To"
                 android:enabled="false"
-                android:inputType="date" />
+                android:inputType="date"
+                android:background="@drawable/round_edittext"/>
         </android.support.design.widget.TextInputLayout>
         <ImageView
             android:id="@+id/to_calendar_icon"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin_xxlarge"
             android:src="@drawable/ic_date_range_black_24dp" />
     </LinearLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/resultTIL"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+        <EditText
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_marginLeft="@dimen/margin_xxlarge"
+            android:layout_marginRight="@dimen/margin_xxlarge"
+            android:gravity="left"
+            android:hint="@string/result"
+            android:padding="@dimen/padding_large"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_large"
+            android:background="@drawable/round_edittext"/>
+    </android.support.design.widget.TextInputLayout>
     <Button
-        android:id="@+id/saveChanges"
+        android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_large"
         android:background="@drawable/round_button"
         android:padding="@dimen/padding_xlarge"
-        android:text="@string/save_changes"
+        android:text="@string/add"
         android:textColor="@android:color/white"
         android:textSize="@dimen/text_size_xlarge"
         android:layout_gravity="center"/>
