@@ -67,7 +67,8 @@
                 android:padding="@dimen/padding_large"
                 android:hint="From"
                 android:enabled="false"
-                android:inputType="date" />
+                android:inputType="date"
+                android:background="@drawable/round_edittext"/>
         </android.support.design.widget.TextInputLayout>
         <ImageView
             android:id="@+id/from_calendar_icon"
@@ -91,7 +92,8 @@
                 android:padding="@dimen/padding_large"
                 android:hint="To"
                 android:enabled="false"
-                android:inputType="date" />
+                android:inputType="date"
+                android:background="@drawable/round_edittext"/>
         </android.support.design.widget.TextInputLayout>
         <ImageView
             android:id="@+id/to_calendar_icon"
