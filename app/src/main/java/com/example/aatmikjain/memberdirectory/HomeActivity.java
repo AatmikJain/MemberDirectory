@@ -1,12 +1,16 @@
 package com.example.aatmikjain.memberdirectory;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,69 +28,73 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import Adapters.NotificationAdapter;
-import Tables.NotificationTable;
+import Database.DatabaseHelper;
+import Database.EditLogTable;
+import Database.NotificationTable;
+
+import static android.os.Build.VERSION_CODES.M;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView nameTv, emailTv;
     SearchView searchSv;
     RecyclerView recyclerView;
-    FloatingActionButton floatingActionButtonFab;
     DatabaseHelper databaseHelper;
     Cursor cursor;
+    ArrayList<EditLogTable> editLogTables = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         View header = navigationView.getHeaderView(0);
-        databaseHelper = DatabaseHelper.getInstance(this);
-        cursor = databaseHelper.getNotification();
         searchSv = findViewById(R.id.search);
         recyclerView = findViewById(R.id.recycler_view);
-        floatingActionButtonFab = findViewById(R.id.fab);
+        SharedPreferences sp = getSharedPreferences("DIR", Context.MODE_PRIVATE);
+        databaseHelper = DatabaseHelper.getInstance(this);
+        cursor = databaseHelper.getNotification();
+
+        //search view
         searchSv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 ArrayList<ArrayList<String>>  notificationData = new ArrayList<>();
                 recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayout.VERTICAL, false));
                 recyclerView.addItemDecoration(new DividerItemDecoration(HomeActivity.this, LinearLayout.VERTICAL));
+                cursor = databaseHelper.getNotification();
                 if(cursor!=null)
                 {
                     if(cursor.getCount()>0)
                     {
                         NotificationTable keys = new NotificationTable();
-                        String title, summary, domain, desc;
+                        String title, summary, startDate, desc;
                         cursor.moveToFirst();
                         do{
                             ArrayList<String> notification = new ArrayList<>();
                             title = cursor.getString(cursor.getColumnIndex(keys.getTitle()));
-                            domain = cursor.getString(cursor.getColumnIndex(keys.getDomain()));
                             summary = cursor.getString(cursor.getColumnIndex(keys.getSummary()));
+                            startDate = cursor.getString(cursor.getColumnIndex(keys.getStartDate()));
                             desc = cursor.getString(cursor.getColumnIndex(keys.getDescription()));
                             notification.add(title);
-                            notification.add(domain);
                             notification.add(summary);
-                            notification.add(cursor.getString(3));
-                            notification.add(cursor.getString(4));
+                            notification.add(startDate);
                             notification.add(desc);
                             if(title.contains(query) || desc.contains(query))
                             {
                                 notificationData.add(notification);
                             }
                         }while(cursor.moveToNext());
-//                        Toast.makeText(HomeActivity.this, notificationData.get(0).get(0), Toast.LENGTH_LONG).show();
-                        NotificationAdapter notificationAdapter = new NotificationAdapter(notificationData);
+                        NotificationAdapter notificationAdapter = new NotificationAdapter(notificationData, HomeActivity.this);
                         recyclerView.setAdapter(notificationAdapter);
-//                        Toast.makeText(HomeActivity.this, notificationAdapter.getItemCount() + "", Toast.LENGTH_LONG).show();
                     }
                     else
                         Toast.makeText(HomeActivity.this, "Empty Table", Toast.LENGTH_LONG).show();
@@ -100,46 +108,27 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        //Edit Log Table
+        cursor = databaseHelper.getEditLog();
+        if(cursor!=null)
+        {
+            if(cursor.getCount()>0)
+            {
+                EditLogTable keys = new EditLogTable();
+                String email, lastEdit;
+                cursor.moveToFirst();
+                do{
+                    email = cursor.getString(cursor.getColumnIndex(keys.getEmail()));
+                    lastEdit = cursor.getString(cursor.getColumnIndex(keys.getLastEdit()));
+                    editLogTables.add(new EditLogTable(email, lastEdit));
+                }while(cursor.moveToNext());
+            }
+        }
+
         nameTv = header.findViewById(R.id.name);
         emailTv = header.findViewById(R.id.email);
-        SharedPreferences sp = getSharedPreferences("DIR", Context.MODE_PRIVATE);
         nameTv.setText(sp.getString("firstName",""));
         emailTv.setText(sp.getString("email",""));
-
-//        email = findViewById(R.id.emailTv);
-//        String str = sp.getString("email", "");
-////        email.setText(str.toCharArray(), 0, str.length());
-
-        /*recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, false));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
-
-        ArrayList<ArrayList<String>>  notificationData = new ArrayList<>();
-        databaseHelper = DatabaseHelper.getInstance(this);
-        Cursor cursor = databaseHelper.getNotification();
-            cursor.moveToFirst();
-            do {
-                ArrayList<String> notification = new ArrayList<>();
-                notification.add(cursor.getString(0));
-                notification.add(cursor.getString(1));
-                notification.add(cursor.getString(2));
-                notification.add(cursor.getString(3));
-                notification.add(cursor.getString(4));
-                notificationData.add(notification);
-            } while (cursor.moveToNext());
-
-            NotificationAdapter notificationAdapter = new NotificationAdapter(notificationData);
-            recyclerView.setAdapter(notificationAdapter);
-            Toast.makeText(this, notificationAdapter.getItemCount() + "", Toast.LENGTH_LONG).show();*/
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -151,7 +140,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -174,7 +163,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.my_profile) {
+            Intent intent = new Intent(this, MyProfileActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -198,7 +189,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
 
         } else if (id == R.id.nav_generate_pdf) {
-
+            callPdf();
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
@@ -209,10 +200,49 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         else if (id == R.id.nav_about) {
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
+        }else if(id == R.id.nav_share){
+            Intent intent = new Intent(this, SearchActivity.class);
+            startActivity(intent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void callPdf(){
+        String fileName=System.currentTimeMillis()+"sgsits.pdf";
+        new MyPdf().write(this,fileName,editLogTables);
+
+        Intent pdfOpenintent = new Intent(Intent.ACTION_VIEW);
+
+        try {
+            if (Build.VERSION.SDK_INT > M) {
+                try {
+                    Uri photoURI = FileProvider.getUriForFile(
+                            this,
+                            getApplicationContext().getPackageName() +".my.package.name.provider",
+                            new File( "/sdcard/Download/"+fileName)
+                    );
+                    pdfOpenintent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    pdfOpenintent.setDataAndType(
+                            photoURI,
+                            "application/pdf"
+                    );
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }else{
+                pdfOpenintent.setDataAndType(
+                        Uri.parse("file://" + "/sdcard/Download"+"/" + fileName),
+                        "application/pdf"
+                );
+
+            }
+            startActivity(pdfOpenintent);
+        } catch (ActivityNotFoundException e) {
+
+        }
     }
 }
