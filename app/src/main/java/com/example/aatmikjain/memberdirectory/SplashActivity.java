@@ -12,7 +12,7 @@ import android.widget.ViewAnimator;
 public class SplashActivity extends AppCompatActivity {
 
     private ImageView logo;
-    private static long SPLASH_TIME = 2000;
+    private static long SPLASH_TIME = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

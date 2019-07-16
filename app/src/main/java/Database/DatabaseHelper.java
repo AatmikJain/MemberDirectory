@@ -1,4 +1,4 @@
-package com.example.aatmikjain.memberdirectory;
+package Database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,12 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import Tables.EditLogTable;
-import Tables.EducationalDetailsTable;
-import Tables.LoginTable;
-import Tables.NotificationTable;
-import Tables.ProfessionalDetailsTable;
-import Tables.UserTable;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static String dbName = "data_dir";
@@ -53,7 +49,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
             ContentValues contentValues = new ContentValues();
-            contentValues.put(keyCustID.getTableName(), educationalDetailsTable.getTableName());
             contentValues.put(keyCustID.getEmail(), educationalDetailsTable.getEmail());
             contentValues.put(keyCustID.getInstituteName(), educationalDetailsTable.getInstituteName());
             contentValues.put(keyCustID.getDegree(), educationalDetailsTable.getDegree());
@@ -76,6 +71,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         EducationalDetailsTable educationalDetailsTable = new EducationalDetailsTable();
         return sqLiteDatabase.rawQuery("Select * from "+ educationalDetailsTable.getTableName()+";", null);
     }
+    public boolean deleteEducationDetail(String[] details){
+        SQLiteDatabase sqLiteDatabase = getMyWritableDatabase();
+        EducationalDetailsTable educationalDetailsTable = new EducationalDetailsTable();
+        return sqLiteDatabase.delete(educationalDetailsTable.getTableName(),
+                educationalDetailsTable.getDegree() + " =?  and "+
+                educationalDetailsTable.getInstituteName() + " =? and "+
+                educationalDetailsTable.getBoard_University() + " =? and "+
+                educationalDetailsTable.getStart_Date() + " =? and "+
+                educationalDetailsTable.getEnd_Date() + " =? and "+
+                educationalDetailsTable.getResult() + " =? ",
+                details)>0;
+    }
 
     public boolean addProfessionalDetails(ProfessionalDetailsTable professionalDetailsTable)
     {
@@ -84,7 +91,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
             ContentValues contentValues = new ContentValues();
-            contentValues.put(keyCustID.getTableName(), professionalDetailsTable.getTableName());
             contentValues.put(keyCustID.getEmail(), professionalDetailsTable.getEmail());
             contentValues.put(keyCustID.getCompanyName(), professionalDetailsTable.getCompanyName());
             contentValues.put(keyCustID.getPosition(), professionalDetailsTable.getPosition());
@@ -120,7 +126,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             contentValues.put(keyCustID.getStartDate(), notificationTable.getStartDate());
 
             sqLiteDatabase.insert(keyCustID.getTableName(), null, contentValues);
-
             return true;
         }catch (Exception e){
             e.printStackTrace();
@@ -167,6 +172,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         UserTable userTable = new UserTable();
         return sqLiteDatabase.rawQuery("Select * from "+ userTable.getTableName()+";", null);
+    }
+
+    public Cursor getDataFromUserByCity(String[] cities){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        UserTable userTable = new UserTable();
+        String city = Arrays.toString(cities);
+        city = "\'"+city.substring(1,city.length()-1)+"\'";
+        city = city.replaceAll(", ", "', '");
+        return sqLiteDatabase.rawQuery("Select * from "+ userTable.getTableName()+" where "+userTable.getCity()+" in("+city+")", null);
+    }
+
+    public boolean updateUserPassword(UserTable userTable)
+    {
+        try{
+            UserTable keyUserTable = new UserTable();
+            SQLiteDatabase sqLiteDatabase = getMyWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(keyUserTable.getPassword(), userTable.getPassword());
+            sqLiteDatabase.update(keyUserTable.getTableName(), contentValues, "email=?", new String[]{userTable.getEmail()});
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public boolean updateUserData(UserTable userTable)

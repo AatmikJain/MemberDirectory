@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.aatmikjain.memberdirectory.FirstFragment;
-import com.example.aatmikjain.memberdirectory.SecondFragment;
-import com.example.aatmikjain.memberdirectory.ThirdFragment;
+import Fragments.GeneralDetailFragment;
+import Fragments.EducationFragment;
+import Fragments.ProfessionFragment;
 
 public class PagerAdapter extends FragmentPagerAdapter {
     int numberOfTabs;
@@ -20,11 +20,11 @@ public class PagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int i) {
         switch(i)
         {
-            case 0 : FirstFragment tab1 = new FirstFragment();
+            case 0 : GeneralDetailFragment tab1 = new GeneralDetailFragment();
             return tab1;
-            case 1: SecondFragment tab2 = new SecondFragment();
+            case 1: EducationFragment tab2 = new EducationFragment();
             return tab2;
-            case 2: ThirdFragment tab3 = new ThirdFragment();
+            case 2: ProfessionFragment tab3 = new ProfessionFragment();
             return tab3;
             default: return null;
         }

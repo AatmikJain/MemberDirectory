@@ -1,18 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin"
-    tools:context=".SearchActivity">
-
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".SearchActivity" >
     <SearchView
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:queryHint="Search"
-        android:iconifiedByDefault="false">
+        android:iconifiedByDefault="false"/>
 
-    </SearchView>
-</RelativeLayout>
+    <!--<EditText
+        android:id="@+id/edit_text"
+        android:dividerHeight="4dp"
+        android:cacheColorHint="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:inputType="none"
+        android:text="Select Cities"
+        android:textSize="@dimen/text_size_large"/>-->
+    <Button
+        android:id="@+id/selectCities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_xlarge"
+        android:text="Select Cities"
+        android:textSize="@dimen/text_size_large"
+        android:textColor="@android:color/white"
+        android:background="@drawable/round_button"/>
+
+    <android.support.v7.widget.RecyclerView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/search_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_gravity="center"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".SearchActivity"
+        tools:showIn="@layout/activity_search"/>
+
+</LinearLayout>

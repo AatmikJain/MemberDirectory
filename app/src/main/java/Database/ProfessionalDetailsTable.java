@@ -1,4 +1,4 @@
-package Tables;
+package Database;
 
 import android.database.sqlite.SQLiteDatabase;
 

@@ -10,35 +10,52 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import static android.content.res.Resources.*;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener{
 
+    TextView changePasswordTv;
     ImageView changePasswordIv;
     Switch modeSw;
+    static int mode=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        changePasswordIv = findViewById(R.id.changePassword);
+        changePasswordIv = findViewById(R.id.changePasswordIcon);
         changePasswordIv.setOnClickListener(this);
+        changePasswordTv = findViewById(R.id.changePassword);
+        changePasswordTv.setOnClickListener(this);
 
         modeSw = findViewById(R.id.nightMode);
         modeSw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)
+                {
+                    mode=2;
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
+                else
+                {
+                    mode=1;
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
             }
         });
     }
 
+    public static int getMode()
+    {
+        return mode;
+    }
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.changePassword)
+        if(v.getId()==R.id.changePassword || v.getId()==R.id.changePassword)
         {
             Intent intent = new Intent(this, ChangePasswordActivity.class);
             startActivity(intent);

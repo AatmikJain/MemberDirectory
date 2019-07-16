@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -44,9 +45,10 @@ import Adapters.SearchResultAdapter;
 import Database.DatabaseHelper;
 import Database.UserTable;
 
-public class SearchActivity extends Activity {
+public class SearchActivity extends Activity implements View.OnClickListener{
 
-    EditText editText;
+//    EditText editText;
+    Button selectCitiesBtn;
     SearchView searchViewSv;
     String firstName, lastName, name;
     ArrayList<String> selected = new ArrayList<>();
@@ -71,14 +73,14 @@ public class SearchActivity extends Activity {
 
         userRecyclerView = findViewById(R.id.search_recycler_view);
         databaseHelper = DatabaseHelper.getInstance(this);
+        userRecyclerView.setLayoutManager(new LinearLayoutManager(SearchActivity.this, LinearLayout.VERTICAL, false));
+        userRecyclerView.addItemDecoration(new DividerItemDecoration(SearchActivity.this, LinearLayout.VERTICAL));
 
         searchViewSv = findViewById(R.id.search);
         searchViewSv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 ArrayList<String>  names = new ArrayList<>();
-                userRecyclerView.setLayoutManager(new LinearLayoutManager(SearchActivity.this, LinearLayout.VERTICAL, false));
-                userRecyclerView.addItemDecoration(new DividerItemDecoration(SearchActivity.this, LinearLayout.VERTICAL));
                 cursor = databaseHelper.getDataFromUser();
                 if(cursor!=null)
                 {
@@ -94,6 +96,8 @@ public class SearchActivity extends Activity {
                                 names.add(firstName+lastName);
                             }
                         }while(cursor.moveToNext());
+                        SearchResultAdapter searchResultAdapter = new SearchResultAdapter(names);
+                        userRecyclerView.setAdapter(searchResultAdapter);
                     }
                     else
                         Toast.makeText(SearchActivity.this, "Empty Table", Toast.LENGTH_LONG).show();
@@ -106,106 +110,106 @@ public class SearchActivity extends Activity {
                 return false;
             }
         });
-        editText = findViewById(R.id.edit_text);
-        editText.setOnClickListener(new OnClickListener()
+        selectCitiesBtn = findViewById(R.id.selectCities);
+        selectCitiesBtn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.selectCities)
         {
-            @Override
-            public void onClick(View view) {
-                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                View popupView = inflater.inflate(R.layout.popup_search_list, null);
-                mListView = popupView.findViewById(R.id.list_view);
-                if (isNotAdded) {
-                    final View headerView = getLayoutInflater().inflate(R.layout.custom_list_view_header,
-                            mListView, false);
-                    checkBox_header = headerView.findViewById(R.id.checkBox_header);
-                    checkBox_header.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            for (int i = 0; i < count; i++) {
-                                mChecked.put(i, checkBox_header.isChecked());
-                            }
-                            adapter.notifyDataSetChanged();
+            LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+            View popupView = inflater.inflate(R.layout.popup_search_list, null);
+            // create the popup window
+            int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+            int height = LinearLayout.LayoutParams.MATCH_PARENT;
+            boolean focusable = true;
+            final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+            // show the popup window
+            // which view you pass in doesn't matter, it is only used for the window tolken
+            popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+            mListView = popupView.findViewById(R.id.list_view);
+            if (isNotAdded)
+            {
+                final View headerView = getLayoutInflater().inflate(R.layout.custom_list_view_header,
+                        mListView, false);
+                checkBox_header = headerView.findViewById(R.id.checkBox_header);
+                checkBox_header.setOnClickListener(new OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v) {
+                        for (int i = 0; i < count; i++) {
+                            mChecked.put(i, checkBox_header.isChecked());
                         }
-                    });
-                    mListView.addHeaderView(headerView);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+                mListView.addHeaderView(headerView);
 
 //            isNotAdded = false;
-                }
-                mListView.setAdapter(adapter);
-                mListView.setOnItemClickListener(new OnItemClickListener() {
-
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        if (position == 0) {
-                            Toast.makeText(getApplicationContext(),
-                                    checkBox_header.getId() + "\n" + checkBox_header.isChecked(),
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            position = position - 1; // "-1" If Header is Added
-                            Toast.makeText(getApplicationContext(),textviewContent[position] + "\n" + mChecked.get(position), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-                editText.setText("");
-                for(int i=0; i<count; i++)
-                {
-                    if(mChecked.get(i))
-                    {
-                        selected.add(textviewContent[i]);
-                        editText.append(textviewContent[i]);
-                    }
-                }
-
-                // create the popup window
-                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                int height = LinearLayout.LayoutParams.MATCH_PARENT;
-                boolean focusable = true;
-                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-
-                // show the popup window
-                // which view you pass in doesn't matter, it is only used for the window tolken
-                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-
-                int len = selected.size();
-                Toast.makeText(SearchActivity.this,len+"", Toast.LENGTH_LONG).show();
-                if(len>0) {
-                    String[] selectedCitites = new String[len];
-                    for(int i=0; i<len; i++)
-                        selectedCitites[i] = selected.get(i);
-
-                    cursor = databaseHelper.getDataFromUserByCity(selectedCitites);
-                    if (cursor != null) {
-                        if (cursor.getCount() > 0) {
-                            UserTable userTable = new UserTable();
-                            cursor.moveToFirst();
-                            ArrayList<String> names = new ArrayList<>();
-                            do {
-                                firstName = cursor.getString(cursor.getColumnIndex(userTable.getFirstName()));
-                                lastName = cursor.getString(cursor.getColumnIndex(userTable.getLastName()));
-                                name = firstName + " " + lastName;
-                                names.add(name);
-                            } while (cursor.moveToNext());
-                            SearchResultAdapter searchResultAdapter = new SearchResultAdapter(names);
-                            userRecyclerView.setAdapter(searchResultAdapter);
-                        } else
-                            Toast.makeText(SearchActivity.this, "Empty Education Table", Toast.LENGTH_LONG).show();
-                    } else
-                        Toast.makeText(SearchActivity.this, "null cursor", Toast.LENGTH_LONG).show();
-                }
-
-                // dismiss the popup window when touched
-                popupView.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        popupWindow.dismiss();
-                        return true;
-                    }
-                });
             }
-        });
+            mListView.setAdapter(adapter);
+            /*mListView.setOnItemClickListener(new OnItemClickListener()
+            {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (position == 0) {
+                        Toast.makeText(getApplicationContext(),
+                                checkBox_header.getId() + "\n" + checkBox_header.isChecked(),
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        position = position - 1; // "-1" If Header is Added
+                        Toast.makeText(getApplicationContext(),textviewContent[position] + "\n" + mChecked.get(position), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });*/
 
+//                editText.setText("");
+            for(int i=0; i<count; i++)
+            {
+                if(mChecked.get(i))
+                {
+                    selected.add(textviewContent[i]);
+//                        editText.append(textviewContent[i]+" ");
+                }
+            }
 
+            // dismiss the popup window when touched
+            popupView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    int len = selected.size();
+                    if(len>0) {
+                        String[] selectedCitites = new String[len];
+                        for(int i=0; i<len; i++)
+                            selectedCitites[i] = selected.get(i);
+
+                        cursor = databaseHelper.getDataFromUserByCity(selectedCitites);
+                        if (cursor != null) {
+                            if (cursor.getCount() > 0) {
+                                UserTable userTable = new UserTable();
+                                cursor.moveToFirst();
+                                ArrayList<String> names = new ArrayList<>();
+                                do {
+                                    firstName = cursor.getString(cursor.getColumnIndex(userTable.getFirstName()));
+                                    lastName = cursor.getString(cursor.getColumnIndex(userTable.getLastName()));
+                                    name = firstName + " " + lastName;
+                                    names.add(name);
+                                } while (cursor.moveToNext());
+                                SearchResultAdapter searchResultAdapter = new SearchResultAdapter(names);
+                                userRecyclerView.setAdapter(searchResultAdapter);
+                            } else
+                                Toast.makeText(SearchActivity.this, "Empty Education Table", Toast.LENGTH_LONG).show();
+                        } else
+                            Toast.makeText(SearchActivity.this, "null cursor", Toast.LENGTH_LONG).show();
+                    }
+                    popupWindow.dismiss();
+                    return true;
+                }
+            });
+
+        }
     }
 
     public class CustomAdapter extends BaseAdapter {

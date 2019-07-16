@@ -15,6 +15,7 @@
         android:orientation="horizontal"
         android:padding="@dimen/padding_large">
         <TextView
+            android:id="@+id/changePassword"
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="wrap_content"
@@ -22,7 +23,7 @@
             android:textSize="@dimen/text_size_xlarge"
             android:textColor="@android:color/black" />
         <ImageView
-            android:id="@+id/changePassword"
+            android:id="@+id/changePasswordIcon"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"

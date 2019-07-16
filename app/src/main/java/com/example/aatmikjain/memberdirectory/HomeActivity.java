@@ -200,9 +200,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         else if (id == R.id.nav_about) {
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
-        }else if(id == R.id.nav_share){
-            Intent intent = new Intent(this, SearchActivity.class);
-            startActivity(intent);
         }
 
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);

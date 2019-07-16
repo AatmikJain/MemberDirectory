@@ -1,10 +1,9 @@
-package com.example.aatmikjain.memberdirectory;
+package Fragments;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,19 +15,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.itextpdf.text.Image;
+import com.example.aatmikjain.memberdirectory.OnLastEditChangeListener;
+import com.example.aatmikjain.memberdirectory.R;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import Tables.EditLogTable;
-import Tables.ProfessionalDetailsTable;
+import Database.DatabaseHelper;
+import Database.EditLogTable;
+import Database.ProfessionalDetailsTable;
 
 
-public class ThirdFragment extends Fragment implements View.OnClickListener {
+public class ProfessionFragment extends Fragment implements View.OnClickListener {
 
     EditText organisationEt, positionEt, fromEt, toEt;
     ImageView fromIconIv, toIconIv;
@@ -40,14 +40,14 @@ public class ThirdFragment extends Fragment implements View.OnClickListener {
     DatabaseHelper databaseHelper;
     SharedPreferences sharedPreferences;
     OnLastEditChangeListener onLastEditChangeListener;
-    public ThirdFragment() {
+    public ProfessionFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_third, container, false);
+        View view = inflater.inflate(R.layout.fragment_profession, container, false);
 
         sharedPreferences = getActivity().getSharedPreferences("DIR", Context.MODE_PRIVATE);
 

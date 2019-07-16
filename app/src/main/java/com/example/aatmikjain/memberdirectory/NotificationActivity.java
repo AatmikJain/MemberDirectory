@@ -12,7 +12,8 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-import Tables.NotificationTable;
+import Database.DatabaseHelper;
+import Database.NotificationTable;
 
 public class NotificationActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -82,6 +83,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
             startDateEt.setText(day+"/"+month+"/"+year);
         if(!dateFlag)
             endDateEt.setText(day+"/"+month+"/"+year);
+        dateFlag = !dateFlag;
     }
 
     @Override

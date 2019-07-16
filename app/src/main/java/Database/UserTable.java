@@ -1,4 +1,4 @@
-package Tables;
+package Database;
 
 import android.database.sqlite.SQLiteDatabase;
 
@@ -23,7 +23,7 @@ public class UserTable
         sqLiteDatabase.execSQL(sql);
     }
 
-    public UserTable( String firstName, String lastName, String email, String password, String mobile, String branch, String city, String pincode, String gender, String dob, String lastEdit) {
+    public UserTable(String firstName, String lastName, String email, String password, String mobile, String branch, String city, String pincode, String gender, String dob, String lastEdit) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -47,6 +47,11 @@ public class UserTable
         this.pincode = pincode;
         this.dob = dob;
         this.lastEdit = lastEdit;
+    }
+
+    public UserTable(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
     public UserTable() {

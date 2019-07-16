@@ -1,4 +1,4 @@
-package com.example.aatmikjain.memberdirectory;
+package Fragments;
 
 import android.Manifest;
 import android.app.Activity;
@@ -13,6 +13,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
@@ -20,6 +22,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,21 +33,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.aatmikjain.memberdirectory.GalleryPickerUtil;
+import com.example.aatmikjain.memberdirectory.OnLastEditChangeListener;
+import com.example.aatmikjain.memberdirectory.R;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import Tables.EditLogTable;
-import Tables.UserTable;
+import Database.DatabaseHelper;
+import Database.EditLogTable;
+import Database.UserTable;
 
 
-public class FirstFragment extends Fragment implements View.OnClickListener{
+public class GeneralDetailFragment extends Fragment implements View.OnClickListener{
 
-    private Button saveChangesBtn, uploadPhotoBtn;
+    private Button saveChangesBtn;
     private EditText firstNameEt, lastNameEt, mobileNumberEt, branchEt, dobEt, cityEt, pincodeEt;
-    private ImageView cal_icon, profilePhotoIv;
+    private ImageView cal_icon, profilePhotoIv, galleryIconIv, camerIconIv;
     TextView lastEditTv;
 
     private Calendar calendar;
@@ -63,14 +71,14 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
     SharedPreferences sharedPreferences;
     OnLastEditChangeListener onLastEditChangeListener;
 
-    public FirstFragment() {
+    public GeneralDetailFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_first, container, false);
+        View view = inflater.inflate(R.layout.fragment_general_details, container, false);
 
         sharedPreferences = getActivity().getSharedPreferences("DIR", Context.MODE_PRIVATE);
 
@@ -78,11 +86,17 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         firstNameEt = view.findViewById(R.id.firstName);
         firstNameEt.setText(sharedPreferences.getString("firstName",""));
         lastNameEt = view.findViewById(R.id.lastName);
+        lastNameEt.setText(sharedPreferences.getString("lastName",""));
         mobileNumberEt = view.findViewById(R.id.mobileNumber);
+        mobileNumberEt.setText(sharedPreferences.getString("mobile",""));
         branchEt = view.findViewById(R.id.branch);
+        branchEt.setText(sharedPreferences.getString("branch", ""));
         dobEt = view.findViewById(R.id.dob);
+        dobEt.setText(sharedPreferences.getString("dob",""));
         cityEt = view.findViewById(R.id.city);
+        cityEt.setText(sharedPreferences.getString("city",""));
         pincodeEt = view.findViewById(R.id.pincode);
+        pincodeEt.setText(sharedPreferences.getString("pincode",""));
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -95,9 +109,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         saveChangesBtn = view.findViewById(R.id.saveChanges);
         saveChangesBtn.setOnClickListener(this);
 
-        uploadPhotoBtn = view.findViewById(R.id.uploadPhoto);
-
-        uploadPhotoBtn.setOnClickListener(new View.OnClickListener() {
+        galleryIconIv = view.findViewById(R.id.galleryIcon);
+        galleryIconIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -109,16 +122,87 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
                 }
             }
         });
-
+        camerIconIv = view.findViewById(R.id.cameraIcon);
+        camerIconIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if(checkPermission()){
+                        cameraImageCall();
+                    }
+                } else {
+                    cameraImageCall();
+                }
+            }
+        });
         databaseHelper = DatabaseHelper.getInstance(getContext());
         return view;
 
     }
+    @Override
+    public void onClick(View v)
+    {
+        if (v.getId() == R.id.calendar_icon) {
+            DatePickerDialog date =  new DatePickerDialog(getActivity(), myDateListener, year, month, day);
+            date.show();
+        }
+        if(v.getId()==R.id.saveChanges)
+        {
+            String currentDateTimeString = getDateTime();
+            UserTable inputData = new UserTable(
+                    firstNameEt.getText().toString(),
+                    lastNameEt.getText().toString(),
+                    sharedPreferences.getString("email",""),
+                    mobileNumberEt.getText().toString(),
+                    branchEt.getText().toString(),
+                    cityEt.getText().toString(),
+                    pincodeEt.getText().toString(),
+                    dobEt.getText().toString(),
+                    currentDateTimeString
+            );
+            if(databaseHelper.updateUserData(inputData)) {
+                if(databaseHelper.addEditLog(new EditLogTable(sharedPreferences.getString("email",""), currentDateTimeString))) {
 
-    private void galleryImageCall() {
-        GalleryPickerUtil.launchGallery(FirstFragment.this);
+                    onLastEditChangeListener.updateLastEdit(currentDateTimeString);
+                    Toast.makeText(getContext(), "Update successful", Toast.LENGTH_LONG).show();
+                }
+                else
+                    Toast.makeText(getContext(), "Edit Log Failed", Toast.LENGTH_LONG).show();
+            }
+            else
+                Toast.makeText(getContext(), "Failed", Toast.LENGTH_LONG).show();
+        }
     }
 
+    private String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+    private void galleryImageCall() {
+        GalleryPickerUtil.launchGallery(GeneralDetailFragment.this);
+    }
+    private void cameraImageCall(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (Build.VERSION.SDK_INT > 23) {
+            mImageFile = GalleryPickerUtil.createTempFile();
+            mImageUri = FileProvider.getUriForFile(
+                    getContext(),
+                    getActivity().getPackageName() + ".my.package.name.provider",
+                    mImageFile
+            );
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.putExtra(
+                    android.provider.MediaStore.EXTRA_OUTPUT,
+                    mImageUri
+            );
+            startActivityForResult(intent, GalleryPickerUtil.CAPTURE_PHOTO);
+        } else {
+            startActivityForResult(intent, GalleryPickerUtil.CAPTURE_PHOTO);
+        }
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -191,21 +275,40 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
 
         return false;
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 100) {
+            boolean cameraPermission = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+            boolean readExternalFile = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+            boolean writeExternalFile = grantResults[2] == PackageManager.PERMISSION_GRANTED;
 
-    public void setDate(View view) {
+            if (cameraPermission && readExternalFile && writeExternalFile) {
+               /* if (isFromCamera) {
+                    cameraImageCall(activity!!)
+                } else if (isFromGallery) {
+                    galleryImageCall(activity!!)
+                }*/
+            } else {
+                Snackbar.make(
+                        getActivity().getWindow().getDecorView(),
+                        "Please Grant Permissions to work with camera and gallery.",
+                        Snackbar.LENGTH_INDEFINITE
+                ).setAction("ENABLE",
+                        new View.OnClickListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.M)
+                            @Override
+                            public void onClick(View view) {
+                                requestPermissions(
+                                        stringsPermission
+                                        ,
+                                        PERMISSIONS_MULTIPLE_REQUEST
+                                );
+                            }
 
-//        getActivity().showDialog(view.getId());
-//        Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT).show();
-    }
-
-/*
-//    @Override
-    protected Dialog onCreateDialog(int id) {
-        if (id == R.id.calendar_icon) {
-            return new DatePickerDialog(getActivity(), myDateListener, year, month, day);
+                        }).show();
+            }
         }
-        return null;
-    }*/
+    }
 
     private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -220,48 +323,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
 
     private void showDate(int year, int month, int day) {
         dobEt.setText(day+"/"+month+"/"+year);
-    }
-
-    @Override
-    public void onClick(View v)
-    {
-        if (v.getId() == R.id.calendar_icon) {
-            DatePickerDialog date =  new DatePickerDialog(getActivity(), myDateListener, year, month, day);
-            date.show();
-        }
-        if(v.getId()==R.id.saveChanges)
-        {
-            String currentDateTimeString = getDateTime();
-            UserTable inputData = new UserTable(
-                    firstNameEt.getText().toString(),
-                    lastNameEt.getText().toString(),
-                    sharedPreferences.getString("email",""),
-                    mobileNumberEt.getText().toString(),
-                    branchEt.getText().toString(),
-                    cityEt.getText().toString(),
-                    pincodeEt.getText().toString(),
-                    dobEt.getText().toString(),
-                    currentDateTimeString
-            );
-            if(databaseHelper.updateUserData(inputData)) {
-                if(databaseHelper.addEditLog(new EditLogTable(sharedPreferences.getString("email",""), currentDateTimeString))) {
-
-                    onLastEditChangeListener.updateLastEdit(currentDateTimeString);
-                    Toast.makeText(getContext(), "Update successful", Toast.LENGTH_LONG).show();
-                }
-                else
-                    Toast.makeText(getContext(), "Edit Log Failed", Toast.LENGTH_LONG).show();
-            }
-            else
-                Toast.makeText(getContext(), "Failed", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private String getDateTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-        Date date = new Date();
-        return dateFormat.format(date);
     }
 
     @Override

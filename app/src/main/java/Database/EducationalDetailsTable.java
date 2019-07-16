@@ -1,4 +1,4 @@
-package Tables;
+package Database;
 
 import android.database.sqlite.SQLiteDatabase;
 //import Tables.UserTable;
@@ -49,6 +49,10 @@ public class EducationalDetailsTable
 
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getInstituteName() {

@@ -26,19 +26,25 @@
             android:orientation="vertical"
             android:gravity="center_horizontal"
             tools:context=".RegisterActivity">
-
-            <Button
-                android:id="@+id/uploadPhoto"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/round_button"
-                android:padding="@dimen/padding_xlarge"
-                android:shadowRadius="50"
-                android:text="@string/upload_photo"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_large" />
-
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/galleryIcon"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/margin"
+                    android:src="@drawable/ic_menu_gallery"/>
+                <ImageView
+                    android:id="@+id/cameraIcon"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:src="@drawable/ic_menu_camera"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -149,7 +155,7 @@
                         android:layout_marginRight="@dimen/margin"
                         android:padding="@dimen/padding_large"
                         android:hint="@string/date_of_birth"
-                        android:enabled="false"
+                        android:editable="false"
                         android:inputType="date"
                         android:background="@drawable/round_edittext"/>
                 </android.support.design.widget.TextInputLayout>
@@ -221,7 +227,6 @@
                 android:layout_marginTop="@dimen/margin_large"
                 android:background="@drawable/round_button"
                 android:padding="@dimen/padding_xlarge"
-                android:onClick="setDate"
                 android:text="@string/save_changes"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/text_size_xlarge" />

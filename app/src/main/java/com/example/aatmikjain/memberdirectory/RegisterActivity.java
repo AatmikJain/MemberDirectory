@@ -13,15 +13,15 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import Tables.EditLogTable;
-import Tables.LoginTable;
-import Tables.UserTable;
+import Database.DatabaseHelper;
+import Database.EditLogTable;
+import Database.LoginTable;
+import Database.UserTable;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 

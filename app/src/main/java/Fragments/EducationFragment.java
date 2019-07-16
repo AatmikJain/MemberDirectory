@@ -1,8 +1,7 @@
-package com.example.aatmikjain.memberdirectory;
+package Fragments;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,16 +15,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.text.DateFormat;
+import com.example.aatmikjain.memberdirectory.OnLastEditChangeListener;
+import com.example.aatmikjain.memberdirectory.R;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import Tables.EditLogTable;
-import Tables.EducationalDetailsTable;
+import Database.DatabaseHelper;
+import Database.EditLogTable;
+import Database.EducationalDetailsTable;
 
-public class SecondFragment extends Fragment implements View.OnClickListener{
+public class EducationFragment extends Fragment implements View.OnClickListener{
 
     Button addBtn;
     EditText instituteNameEt, degreeEt, boardUniversityEt, fromEt, toEt, resultEt;
@@ -39,7 +41,7 @@ public class SecondFragment extends Fragment implements View.OnClickListener{
     SharedPreferences sharedPreferences;
     OnLastEditChangeListener onLastEditChangeListener;
 
-    public SecondFragment() {
+    public EducationFragment() {
         // Required empty public constructor
     }
 
@@ -47,7 +49,7 @@ public class SecondFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_second, container, false);
+        View view= inflater.inflate(R.layout.fragment_education, container, false);
 
         sharedPreferences = getActivity().getSharedPreferences("DIR", Context.MODE_PRIVATE);
 
@@ -129,8 +131,6 @@ public class SecondFragment extends Fragment implements View.OnClickListener{
                     fromEt.setText("");
                     toEt.setText("");
                     resultEt.setText("");*/
-//                    Intent intent = new Intent(getContext(), ThirdFragment.class);
-//                    startActivity(intent);
                 }
                 else
                     Toast.makeText(getActivity(), "Edit Log failed", Toast.LENGTH_LONG).show();
